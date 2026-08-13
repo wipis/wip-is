@@ -8,8 +8,10 @@
 /coverage
 
 # build output
-/.output/
 /dist/
+
+# astro (auto-generated types)
+/.astro/
 
 # misc
 .DS_Store
@@ -29,6 +31,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# tanstack router (auto-generated)
-src/routeTree.gen.ts

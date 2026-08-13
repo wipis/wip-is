@@ -1,0 +1,24 @@
+---
+import Base from "~/layouts/Base.astro";
+import SiteFooter from "~/components/SiteFooter.astro";
+import SiteHeader from "~/components/SiteHeader.astro";
+import HomeIntro from "~/components/home/HomeIntro.astro";
+import StarMarks from "~/components/home/StarMarks.astro";
+import WorkList from "~/components/home/WorkList.astro";
+---
+
+<Base>
+  <main class="home-page bg-[--app-bg] min-h-screen text-[--app-fg]">
+    <SiteHeader />
+
+    <article class="relative z-40 p-6 pb-24">
+      <div class="max-w-lg grid gap-12">
+        <HomeIntro />
+        <WorkList />
+        <StarMarks />
+      </div>
+    </article>
+
+    <SiteFooter />
+  </main>
+</Base>

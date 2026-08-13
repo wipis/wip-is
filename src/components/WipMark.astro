@@ -1,0 +1,63 @@
+---
+import {
+  COLLAPSED_WIDTH,
+  ORIGINAL_RECTS,
+  SVG_HEIGHT,
+  SVG_WIDTH,
+  TILE_SIZE,
+} from "~/lib/wip-mark";
+---
+
+<div
+  data-wip-mark
+  class="inline-block bg-[var(--app-bg)] overflow-hidden"
+  style={`width: ${COLLAPSED_WIDTH}px; height: ${SVG_HEIGHT}px; transition: width 0.3s ease-in-out;`}
+>
+  <svg
+    width={SVG_WIDTH}
+    height={SVG_HEIGHT}
+    viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+    fill="var(--app-fg)"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width={SVG_WIDTH} height={SVG_HEIGHT} fill="var(--app-bg)"></rect>
+    {
+      ORIGINAL_RECTS.map((tile) => (
+        <rect
+          data-tile
+          x={tile.x}
+          y={tile.y}
+          width={TILE_SIZE}
+          height={TILE_SIZE}
+          fill="var(--app-fg)"
+          style="transition: all 0.3s ease-in-out;"
+        />
+      ))
+    }
+  </svg>
+</div>
+
+<script>
+  import {
+    COLLAPSED_WIDTH,
+    SVG_WIDTH,
+    tilePosition,
+  } from "~/lib/wip-mark";
+
+  for (const mark of document.querySelectorAll<HTMLElement>("[data-wip-mark]")) {
+    const tiles = mark.querySelectorAll<SVGRectElement>("rect[data-tile]");
+
+    const setHovered = (isHovered: boolean) => {
+      mark.style.width = `${isHovered ? SVG_WIDTH : COLLAPSED_WIDTH}px`;
+
+      tiles.forEach((tile, index) => {
+        const { x, y } = tilePosition(index, isHovered);
+        tile.setAttribute("x", String(x));
+        tile.setAttribute("y", String(y));
+      });
+    };
+
+    mark.addEventListener("mouseenter", () => setHovered(true));
+    mark.addEventListener("mouseleave", () => setHovered(false));
+  }
+</script>

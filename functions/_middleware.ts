@@ -1,7 +1,3 @@
-import { defineEventHandler } from "nitro/h3";
-
-import { CANONICAL_HOST } from "~/lib/constants";
-
 /**
  * Redirects every non-canonical hostname to CANONICAL_HOST.
  *
@@ -10,11 +6,22 @@ import { CANONICAL_HOST } from "~/lib/constants";
  * the site. Cloudflare Pages has no "primary domain" setting, so the canonical
  * choice has to be enforced here.
  *
- * Note: dist/_routes.json excludes /assets/*, /favicon.ico and /robots.txt from
- * the Worker, so those are served by Pages directly and never reach this
- * middleware. Document requests — the ones that matter for canonicalisation —
- * all pass through here.
+ * This replaces the Nitro middleware the site ran on before. public/_routes.json
+ * keeps static assets from invoking this Function at all — only document
+ * requests, the ones that matter for canonicalisation, reach it.
  */
+
+// Wrangler bundles this file separately from the Astro app, so the import is
+// relative — the `~/*` tsconfig alias is not available here.
+import { CANONICAL_HOST } from "../src/lib/constants";
+
+// Cloudflare's Pages Functions types are not installed; the shape used here is
+// small enough to declare locally.
+interface PagesContext {
+  request: Request;
+  next: () => Promise<Response>;
+}
+
 const EXEMPT_SUFFIXES = [
   // Preview deployments must keep working on their own hostname.
   ".pages.dev",
@@ -36,10 +43,10 @@ function isExempt(hostname: string) {
   return EXEMPT_SUFFIXES.some((suffix) => hostname.endsWith(suffix));
 }
 
-export default defineEventHandler((event) => {
-  const url = new URL(event.req.url);
+export const onRequest = (context: PagesContext) => {
+  const url = new URL(context.request.url);
 
-  if (isExempt(url.hostname)) return;
+  if (isExempt(url.hostname)) return context.next();
 
   url.protocol = "https:";
   url.hostname = CANONICAL_HOST;
@@ -52,4 +59,4 @@ export default defineEventHandler((event) => {
       "cache-control": "public, max-age=3600",
     },
   });
-});
+};

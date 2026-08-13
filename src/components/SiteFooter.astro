@@ -1,0 +1,26 @@
+---
+import ModeToggle from "~/components/ModeToggle.astro";
+import { COPYRIGHT_NAME } from "~/lib/constants";
+
+// Resolved at build time now that the site is prerendered, so the copyright
+// year advances on the next deploy rather than at midnight on New Year's.
+const year = new Date().getFullYear();
+---
+
+<footer class="pointer-events-none fixed inset-x-0 bottom-0 z-50">
+  <div
+    aria-hidden="true"
+    class="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[var(--app-bg)] from-50% to-transparent"
+  >
+  </div>
+
+  <div
+    class="pointer-events-auto relative flex items-center justify-end gap-3 p-6"
+  >
+    <p class="font-light text-sm text-[var(--app-fg-muted)]">
+      &copy; {year} / {COPYRIGHT_NAME}
+    </p>
+
+    <ModeToggle />
+  </div>
+</footer>

@@ -1,0 +1,14 @@
+---
+import CopyEmail from "~/components/CopyEmail.astro";
+import LinkedList from "~/components/home/LinkedList.astro";
+import { DOTTED_LINK_CLASSNAME } from "~/lib/constants";
+import { PROJECT_ITEMS, SOCIAL_ITEMS, WORK_ITEMS } from "~/lib/work";
+---
+
+<section aria-label="Selected work" class="grid gap-4">
+  <LinkedList label="Work" items={WORK_ITEMS} />
+  <LinkedList label="Projects" items={PROJECT_ITEMS} />
+  <LinkedList label="Social" items={SOCIAL_ITEMS}>
+    <CopyEmail slot="prefix" class={DOTTED_LINK_CLASSNAME} />
+  </LinkedList>
+</section>

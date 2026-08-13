@@ -1,0 +1,48 @@
+---
+import { CONTACT_EMAIL } from "~/lib/constants";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<button
+  type="button"
+  data-copy-email
+  data-email={CONTACT_EMAIL}
+  class={`inline font-light text-[var(--app-fg)] transition-colors cursor-pointer ${className}`}
+  >{CONTACT_EMAIL}</button
+>
+
+<script>
+  const COPIED_DURATION = 2000;
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    "[data-copy-email]"
+  )) {
+    const email = button.dataset.email;
+    if (!email) continue;
+
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+
+    button.addEventListener("click", async () => {
+      try {
+        // Falls back to the mail client when the Clipboard API is missing or
+        // blocked (insecure context, denied permission).
+        if (!navigator.clipboard?.writeText) throw new Error("no clipboard");
+
+        await navigator.clipboard.writeText(email);
+
+        button.textContent = "copied";
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          button.textContent = email;
+        }, COPIED_DURATION);
+      } catch {
+        window.location.href = `mailto:${email}`;
+      }
+    });
+  }
+</script>

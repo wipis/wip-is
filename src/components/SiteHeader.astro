@@ -1,0 +1,28 @@
+---
+import WipMark from "~/components/WipMark.astro";
+import { BRAND_NAME } from "~/lib/constants";
+
+interface Props {
+  homeHref?: string;
+}
+
+const { homeHref = "/" } = Astro.props;
+---
+
+<div class="fixed right-6 top-6 z-50 hidden sm:block">
+  <a href={homeHref}>
+    <h1 class="sr-only">{BRAND_NAME}</h1>
+    <WipMark />
+  </a>
+</div>
+
+<div class="fixed top-6 right-6 z-50 sm:hidden">
+  <a href={homeHref}>
+    <img
+      src="/logo.svg"
+      height="24"
+      alt="WIP Logo"
+      class="h-6 w-auto invert dark:invert-0"
+    />
+  </a>
+</div>

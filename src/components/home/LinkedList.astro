@@ -1,0 +1,45 @@
+---
+import { DOTTED_LINK_CLASSNAME } from "~/lib/constants";
+import type { WorkItem } from "~/lib/work";
+
+interface Props {
+  label: string;
+  items: WorkItem[];
+}
+
+const { label, items } = Astro.props;
+
+// An optional `prefix` slot is rendered ahead of the links, comma-joined with
+// them (the Social row uses it for the email button).
+const hasPrefix = Astro.slots.has("prefix");
+
+// Tags below are kept tight against each other on purpose: Astro preserves
+// template whitespace, and a newline between a link and its comma would render
+// as "Vercel , ".
+---
+
+<p class="text-[var(--app-fg)] leading-relaxed">
+  <span class="text-[var(--app-fg-muted)]">{label} — </span>{
+    hasPrefix && <slot name="prefix" />
+  }{
+    hasPrefix && items.length > 0 && (
+      <span class="text-[var(--app-fg-muted)]">, </span>
+    )
+  }{
+    items.map((item, index) => (
+      <span>
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={DOTTED_LINK_CLASSNAME}
+        >
+          {item.company}
+        </a>
+        {index < items.length - 1 && (
+          <span class="text-[var(--app-fg-muted)]">, </span>
+        )}
+      </span>
+    ))
+  }
+</p>

@@ -2,6 +2,10 @@
 import "~/styles/globals.css";
 import "lenis/dist/lenis.css";
 
+// Resolved to the same hashed asset the @font-face in globals.css points at, so
+// the preload below and the CSS request are one and the same fetch.
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+
 import ConsoleMessage from "~/components/ConsoleMessage.astro";
 import {
   BRAND_NAME,
@@ -60,6 +64,19 @@ const structuredData = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/*
+      First thing in the head so the font downloads in parallel with the
+      stylesheet. Without it the font is only discovered after the CSS parses,
+      which is long enough to paint the fallback first.
+    */}
+    <link
+      rel="preload"
+      href={interLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     {/*
       Applies the theme class before first paint so there is no flash of the

@@ -1,4 +1,8 @@
 {
   "name": "wip",
-  "compatibility_date": "2025-04-01"
+  "compatibility_date": "2025-04-01",
+  // Pinned because this Cloudflare login has several accounts, which makes
+  // `wrangler pages deploy` ambiguous in non-interactive shells (like CI).
+  // Not a secret — account IDs are visible in the dashboard URL.
+  "account_id": "4976e8a5df6887f41b287a83e6b5c18f"
 }

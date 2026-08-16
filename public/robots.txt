@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wip.is/sitemap.xml
+Sitemap: https://wip-design.com/sitemap.xml

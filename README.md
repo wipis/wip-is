@@ -1,6 +1,6 @@
-# wip.is
+# wip-design.com
 
-Homepage of [wip.is](https://wip.is) — Astro, Tailwind CSS v4, deployed to Cloudflare Pages.
+Homepage of [wip-design.com](https://wip-design.com) — Astro, Tailwind CSS v4, deployed to Cloudflare Pages.
 
 The site is fully prerendered and ships no UI framework: the interactive pieces
 (theme toggle, copy-to-clipboard email, the WIP mark's hover state, smooth
@@ -40,8 +40,8 @@ public/_routes.json       Keeps static assets from invoking that Function
   setup this site used previously, so existing preferences carry over.
 - **Canonical host.** Several domains point at the same Pages project and
   Cloudflare has no "primary domain" setting, so `functions/_middleware.ts`
-  301s every non-canonical hostname to `wip.is`. `.pages.dev` is exempt so
-  preview deployments stay reachable.
+  301s every non-canonical hostname, including `wip.is`, to `wip-design.com`.
+  `.pages.dev` is exempt so preview deployments stay reachable.
 - **Deploys are direct uploads,** not Git-triggered — pushing to GitHub does
   not update the site. The Pages project has no Git provider connected, so
   `pnpm run deploy` is the only thing that ships it. The script passes

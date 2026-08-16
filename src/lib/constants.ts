@@ -1,6 +1,6 @@
-export const SITE_URL = "https://wip.is";
-/** Every other domain on the Pages project 301s here. See server/middleware/canonical-host.ts */
-export const CANONICAL_HOST = "wip.is";
+export const SITE_URL = "https://wip-design.com";
+/** Every other domain on the Pages project 301s here. See functions/_middleware.ts. */
+export const CANONICAL_HOST = "wip-design.com";
 export const SITE_TITLE = "WIP — Design and Engineering Studio";
 export const SITE_DESCRIPTION =
   "Design and engineering studio by Bridger Tower. Brand, product, and web for select clients and projects.";

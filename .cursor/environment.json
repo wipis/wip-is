@@ -1,0 +1,17 @@
+{
+  "name": "wip-design.com",
+  "install": "pnpm install --frozen-lockfile",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "pnpm dev --host",
+      "description": "Astro dev server with HMR, reachable at http://localhost:4321"
+    }
+  ],
+  "ports": [
+    {
+      "name": "astro dev",
+      "port": 4321
+    }
+  ]
+}

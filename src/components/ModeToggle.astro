@@ -1,19 +1,20 @@
 ---
-// Both icons ship in the markup and CSS picks the right one off the `dark`
-// class on <html>. That keeps the toggle correct on first paint without any
-// mount-state dance. The accessible label is set by src/lib/theme.ts.
+// Both icons ship in the markup and cross-fade off the `dark` class on <html>,
+// so the toggle is correct on first paint with no mount-state dance. The
+// accessible label is set by src/lib/theme.ts.
 ---
 
 <button
   type="button"
   data-mode-toggle
   aria-label="Toggle color mode"
-  class="inline-flex items-center justify-center text-[var(--app-fg-muted)] hover:text-[var(--app-fg)] transition-colors"
+  class="mode-toggle grid size-11 -m-3 place-items-center text-[var(--app-fg-muted)] hover:text-[var(--app-fg)]"
 >
   <svg
+    data-icon="moon"
+    class="mode-icon col-start-1 row-start-1 h-4 w-4"
     aria-hidden="true"
     viewBox="0 0 24 24"
-    class="hidden h-4 w-4 dark:block"
     fill="none"
     stroke="currentColor"
     stroke-width="1.5"
@@ -21,9 +22,10 @@
     <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
   </svg>
   <svg
+    data-icon="sun"
+    class="mode-icon col-start-1 row-start-1 h-4 w-4"
     aria-hidden="true"
     viewBox="0 0 24 24"
-    class="h-4 w-4 dark:hidden"
     fill="none"
     stroke="currentColor"
     stroke-width="1.5"
@@ -34,6 +36,65 @@
     ></path>
   </svg>
 </button>
+
+<style>
+  /* Color hover animates always (a single control, not a list); the press
+     scale is motion, so it only runs when motion is allowed. The button box is
+     44px for the tap target, pulled back with a negative margin so the footer
+     layout is unchanged. */
+  .mode-toggle {
+    transition: color 0.15s ease-out;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mode-toggle {
+      transition:
+        color 0.15s ease-out,
+        scale 0.2s ease-out;
+    }
+
+    .mode-toggle:active {
+      scale: 0.97;
+    }
+  }
+
+  .mode-icon {
+    will-change: transform, opacity, filter;
+  }
+
+  /* Light (default): sun shown, moon parked small + blurred. */
+  [data-icon="moon"] {
+    opacity: 0;
+    transform: scale(0.25);
+    filter: blur(4px);
+  }
+  [data-icon="sun"] {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  /* Dark: reverse. */
+  :global(html.dark) [data-icon="moon"] {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  :global(html.dark) [data-icon="sun"] {
+    opacity: 0;
+    transform: scale(0.25);
+    filter: blur(4px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mode-icon {
+      transition:
+        opacity 0.2s ease-out,
+        transform 0.2s ease-out,
+        filter 0.2s ease-out;
+    }
+  }
+</style>
 
 <script>
   import { toggleTheme } from "~/lib/theme";

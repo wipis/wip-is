@@ -11,7 +11,7 @@ import {
 <div
   data-wip-mark
   class="inline-block bg-[var(--app-bg)] overflow-hidden"
-  style={`width: ${COLLAPSED_WIDTH}px; height: ${SVG_HEIGHT}px; transition: width 0.3s ease-in-out;`}
+  style={`width: ${COLLAPSED_WIDTH}px; height: ${SVG_HEIGHT}px;`}
 >
   <svg
     width={SVG_WIDTH}
@@ -19,6 +19,8 @@ import {
     viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
     fill="var(--app-fg)"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
   >
     <rect width={SVG_WIDTH} height={SVG_HEIGHT} fill="var(--app-bg)"></rect>
     {
@@ -30,12 +32,28 @@ import {
           width={TILE_SIZE}
           height={TILE_SIZE}
           fill="var(--app-fg)"
-          style="transition: all 0.3s ease-in-out;"
         />
       ))
     }
   </svg>
 </div>
+
+<style>
+  /* Named properties only (never `transition: all`), and motion is opt-in for
+     anyone who hasn't asked to reduce it. JS sets the width and each tile's
+     x/y; these declarations animate the change. */
+  @media (prefers-reduced-motion: no-preference) {
+    [data-wip-mark] {
+      transition: width 0.3s ease-out;
+    }
+
+    [data-wip-mark] rect[data-tile] {
+      transition:
+        x 0.3s ease-out,
+        y 0.3s ease-out;
+    }
+  }
+</style>
 
 <script>
   import {

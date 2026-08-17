@@ -54,6 +54,12 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+    /*
+      --app-fg-muted intentionally serves several roles (muted body text, link
+      underline color, footer text, the star marks). They share a value today;
+      split into a dedicated token if any of those roles needs to diverge.
+    */
+
     /* Applies when JS is off and no theme class ever lands on <html>. */
     :root {
         color-scheme: light;
@@ -61,6 +67,7 @@
         --app-bg: #f5f5f5;
         --app-fg: #141414;
         --app-fg-muted: #666;
+        --app-border: #e5e5e5;
     }
 
     html.light {
@@ -68,6 +75,7 @@
         --app-bg: #f5f5f5;
         --app-fg: #141414;
         --app-fg-muted: #666;
+        --app-border: #e5e5e5;
     }
 
     html.dark {
@@ -76,6 +84,7 @@
         --app-fg: #f5f5f5;
         /* #888 measures 4.49:1 on #222 — just under the 4.5:1 AA floor. */
         --app-fg-muted: #8a8a8a;
+        --app-border: #333;
     }
 
     *,
@@ -83,7 +92,29 @@
     ::before,
     ::backdrop,
     ::file-selector-button {
-        border-color: var(--color-gray-200, currentcolor);
+        border-color: var(--app-border, currentcolor);
+    }
+
+    /* Keyboard focus indicator (never removed without a replacement). */
+    :focus-visible {
+        outline: 2px solid var(--app-fg);
+        outline-offset: 2px;
+    }
+
+    /* Underlines clear the descenders. */
+    a {
+        text-underline-position: from-font;
+        text-decoration-skip-ink: auto;
+    }
+
+    /* Subtle hairline so images read as intentional against either palette. */
+    img {
+        outline: 1px solid rgb(0 0 0 / 0.08);
+        outline-offset: -1px;
+    }
+
+    html.dark img {
+        outline-color: rgb(255 255 255 / 0.08);
     }
 }
 
@@ -97,6 +128,8 @@
         cursor: default !important;
         letter-spacing: -0.01em;
         line-height: 1.25;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     * {

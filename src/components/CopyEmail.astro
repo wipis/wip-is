@@ -8,13 +8,16 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<button
-  type="button"
-  data-copy-email
-  data-email={CONTACT_EMAIL}
-  class={`inline font-light text-[var(--app-fg)] transition-colors cursor-pointer ${className}`}
-  >{CONTACT_EMAIL}</button
->
+<span class="contents">
+  <button
+    type="button"
+    data-copy-email
+    data-email={CONTACT_EMAIL}
+    class={`inline-block font-light text-[var(--app-fg)] cursor-pointer transition-[color,scale] duration-200 ease-out motion-safe:active:scale-[0.97] ${className}`}
+    >{CONTACT_EMAIL}</button
+  >
+  <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
+</span>
 
 <script>
   const COPIED_DURATION = 2000;
@@ -24,6 +27,10 @@ const { class: className = "" } = Astro.props;
   )) {
     const email = button.dataset.email;
     if (!email) continue;
+
+    const status = button.parentElement?.querySelector<HTMLElement>(
+      "[data-copy-status]"
+    );
 
     let timeout: ReturnType<typeof setTimeout> | undefined;
 
@@ -35,10 +42,12 @@ const { class: className = "" } = Astro.props;
 
         await navigator.clipboard.writeText(email);
 
-        button.textContent = "copied";
+        button.textContent = "Copied";
+        if (status) status.textContent = "Email address copied";
         clearTimeout(timeout);
         timeout = setTimeout(() => {
           button.textContent = email;
+          if (status) status.textContent = "";
         }, COPIED_DURATION);
       } catch {
         window.location.href = `mailto:${email}`;

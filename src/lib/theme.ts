@@ -42,9 +42,12 @@ export function resolvedTheme(): ResolvedTheme {
  */
 function withoutTransitions(apply: () => void) {
   const style = document.createElement("style");
+  // The palette must snap (no laggy color fade), but the mode toggle's icons
+  // are a deliberate cross-fade driven by the same class change — exempt them
+  // so that one micro-interaction still plays.
   style.append(
     document.createTextNode(
-      "*,*::before,*::after{transition:none!important;animation:none!important}"
+      "*:not(.mode-icon),*::before,*::after{transition:none!important;animation:none!important}"
     )
   );
   document.head.append(style);

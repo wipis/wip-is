@@ -146,23 +146,9 @@ const structuredData = {
 </html>
 
 <script>
-  import Lenis from "lenis";
+  import { initSmoothScroll } from "~/lib/smooth-scroll";
   import { initTheme } from "~/lib/theme";
 
   initTheme();
-
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  new Lenis({
-    autoRaf: true,
-    duration: prefersReducedMotion ? 0 : 1.1,
-    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: !prefersReducedMotion,
-    touchMultiplier: 1.5,
-    syncTouch: false,
-    anchors: true,
-    infinite: false,
-  });
+  initSmoothScroll();
 </script>

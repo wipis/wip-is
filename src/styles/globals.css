@@ -119,18 +119,11 @@
 }
 
 @layer utilities {
-    /*
-      Safari rubber-bands the document even when content fits. Pin html/body
-      to the visible viewport and take scrolling off them entirely — <main>
-      is the only scroller (see src/lib/smooth-scroll.ts).
-    */
     html,
     body {
-        width: 100%;
-        height: 100dvh;
-        max-height: 100dvh;
-        overflow: hidden;
         overscroll-behavior: none;
+        width: 100%;
+        min-height: 100%;
         background-color: var(--app-bg);
         cursor: default !important;
         letter-spacing: -0.01em;

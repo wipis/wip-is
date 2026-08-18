@@ -1,30 +1,34 @@
 import Lenis from "lenis";
 
 /**
- * Safari reports a 1px (sometimes more) gap between scrollHeight and the
- * visible viewport even when the page fits, which is enough for Lenis to
- * animate a bounce. Treat anything at or under that slack as "no overflow".
+ * Safari rubber-bands the *document* (html/body), and window-level Lenis
+ * makes that worse: it puts `.lenis` on <html>, whose CSS sets
+ * `html, body { height: auto }`, which undoes any viewport-height lock.
+ *
+ * Scroll lives on <main> instead. The document is overflow-hidden in CSS
+ * and never moves. Lenis is bound to that inner scroller and only starts
+ * when the scroller's own content is actually taller than it.
  */
 const OVERFLOW_SLACK_PX = 1;
 
-function viewportHeight() {
-  return window.visualViewport?.height ?? window.innerHeight;
+function overflows(scroller: HTMLElement) {
+  return scroller.scrollHeight - scroller.clientHeight > OVERFLOW_SLACK_PX;
 }
 
-function pageOverflows() {
-  return document.documentElement.scrollHeight - viewportHeight() > OVERFLOW_SLACK_PX;
-}
-
-/**
- * Smooth scroll when the document is actually taller than the viewport;
- * otherwise stop Lenis so Safari cannot rubber-band an empty page.
- */
 export function initSmoothScroll() {
+  const wrapper = document.getElementById("main");
+  if (!(wrapper instanceof HTMLElement)) return;
+
+  const article = wrapper.querySelector("article");
+  const content = article instanceof HTMLElement ? article : wrapper;
+
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
   const lenis = new Lenis({
+    wrapper,
+    content,
     autoRaf: true,
     duration: prefersReducedMotion ? 0 : 1.1,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -37,22 +41,22 @@ export function initSmoothScroll() {
   });
 
   const syncScrollLock = () => {
-    if (pageOverflows()) {
+    if (overflows(wrapper)) {
+      wrapper.style.overflowY = "auto";
+      lenis.resize();
       lenis.start();
       return;
     }
 
     lenis.scrollTo(0, { immediate: true });
     lenis.stop();
+    wrapper.style.overflowY = "hidden";
   };
 
   syncScrollLock();
 
-  const onResize = () => {
-    lenis.resize();
-    syncScrollLock();
-  };
-
-  window.addEventListener("resize", onResize);
-  window.visualViewport?.addEventListener("resize", onResize);
+  const observer = new ResizeObserver(syncScrollLock);
+  observer.observe(wrapper);
+  observer.observe(content);
+  window.visualViewport?.addEventListener("resize", syncScrollLock);
 }

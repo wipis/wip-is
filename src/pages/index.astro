@@ -2,6 +2,7 @@
 import Base from "~/layouts/Base.astro";
 import SiteFooter from "~/components/SiteFooter.astro";
 import SiteHeader from "~/components/SiteHeader.astro";
+import HomeAbout from "~/components/home/HomeAbout.astro";
 import HomeIntro from "~/components/home/HomeIntro.astro";
 import StarMarks from "~/components/home/StarMarks.astro";
 import WorkList from "~/components/home/WorkList.astro";
@@ -17,13 +18,14 @@ import WorkList from "~/components/home/WorkList.astro";
 
     <div
       aria-hidden="true"
-      class="pointer-events-none fixed inset-y-0 start-[calc(28rem+3rem)] z-[60] hidden w-px bg-[var(--app-border)] md:block"
+      class="pointer-events-none fixed inset-y-0 start-[calc(32rem+3rem)] z-[60] hidden w-px bg-[var(--app-border)] md:block"
     >
     </div>
 
     <article class="relative z-40 px-6 pt-24 pb-24">
-      <div class="max-w-md grid gap-12">
+      <div class="max-w-lg grid gap-12 text-[1.0625rem]">
         <HomeIntro />
+        <HomeAbout />
         <WorkList />
         <StarMarks />
       </div>

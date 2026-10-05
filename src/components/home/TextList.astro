@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  items: readonly string[];
+}
+
+const { label, items } = Astro.props;
+---
+
+<div class="text-[var(--app-fg)] leading-relaxed">
+  <span class="block text-[var(--app-fg-muted)]">{label} —</span>
+  <ul>
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+</div>

@@ -1,0 +1,32 @@
+---
+import { CONTACT_EMAIL, LINK_CLASSNAME } from "~/lib/constants";
+---
+
+<section
+  aria-label="About"
+  class="grid gap-4 text-[var(--app-fg)] leading-snug text-pretty"
+>
+  <p>
+    Work In Progress is a design and engineering studio run by <a
+      href="https://bridger.to"
+      target="_blank"
+      rel="noopener noreferrer"
+      class={LINK_CLASSNAME}>Bridger Tower</a
+    >. The studio’s work focuses on brand, product, and web for a small number of clients and
+    projects at a time.
+  </p>
+  <p>
+    Recent work includes product and web for Vercel, Laravel, Browserbase, and
+    Supermetal, alongside ongoing work with early-stage teams.
+  </p>
+  <p>
+    In addition to client work, WIP builds and ships its own products and open
+    source, and publishes about the process on YouTube and X.
+  </p>
+  <p>
+    <span class="block text-[var(--app-fg-muted)]">Commissions —</span>
+    <a href={`mailto:${CONTACT_EMAIL}`} class={LINK_CLASSNAME}
+      >{CONTACT_EMAIL}</a
+    >
+  </p>
+</section>

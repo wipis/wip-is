@@ -55,8 +55,8 @@
 */
 @layer base {
     /*
-      --app-fg-muted intentionally serves several roles (muted body text, link
-      underline color, footer text, the star marks). They share a value today;
+      --app-fg-muted intentionally serves several roles (muted body text,
+      footer text, the star marks). They share a value today;
       split into a dedicated token if any of those roles needs to diverge.
     */
 
@@ -99,14 +99,6 @@
     :focus-visible {
         outline: 2px solid var(--app-fg);
         outline-offset: 2px;
-    }
-
-    /* Underlines clear the descenders. The email control is a button, so it
-       needs the same position or its rule sits tighter than the links. */
-    a,
-    button[data-copy-email] {
-        text-underline-position: from-font;
-        text-decoration-skip-ink: auto;
     }
 
     /* Subtle hairline so images read as intentional against either palette. */

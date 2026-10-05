@@ -15,8 +15,14 @@ import WorkList from "~/components/home/WorkList.astro";
   >
     <SiteHeader />
 
-    <article class="relative z-40 p-6 pb-24">
-      <div class="max-w-lg grid gap-12">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-y-0 start-[calc(28rem+3rem)] z-[60] hidden w-px bg-[var(--app-border)] md:block"
+    >
+    </div>
+
+    <article class="relative z-40 px-6 pt-24 pb-24">
+      <div class="max-w-md grid gap-12">
         <HomeIntro />
         <WorkList />
         <StarMarks />

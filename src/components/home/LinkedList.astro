@@ -19,7 +19,7 @@ const hasPrefix = Astro.slots.has("prefix");
 ---
 
 <p class="text-[var(--app-fg)] leading-relaxed">
-  <span class="text-[var(--app-fg-muted)]">{label} — </span>{
+  <span class="block text-[var(--app-fg-muted)]">{label} —</span>{
     hasPrefix && <slot name="prefix" />
   }{
     hasPrefix && items.length > 0 && (

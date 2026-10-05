@@ -1,18 +1,9 @@
 ---
-import { DOTTED_LINK_CLASSNAME } from "~/lib/constants";
+import IntroPhrase from "~/components/home/IntroPhrase.tsx";
 ---
 
-<section class="pe-20 md:pe-0">
-  <h2 class="font-light tracking-tight text-balance mb-3">
-    Work in Progress / Applied Design
+<section>
+  <h2 class="font-light tracking-tight text-balance">
+    WIP <IntroPhrase client:load />
   </h2>
-
-  <p class="text-[var(--app-fg-muted)] text-pretty">
-    Design and Engineering Studio by <a
-      href="https://bridger.to"
-      target="_blank"
-      rel="noopener noreferrer"
-      class={`text-[var(--app-fg)] ${DOTTED_LINK_CLASSNAME}`}>Bridger Tower</a
-    >.
-  </p>
 </section>

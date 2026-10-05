@@ -23,18 +23,24 @@ export const WORK_ITEMS: WorkItem[] = [
 
 export const PROJECT_ITEMS: WorkItem[] = [
   { company: "ShipGTM", href: "https://shipgtm.com" },
-  { company: "Router.so", href: "https://router.so" },
   { company: "Wrk.so", href: "https://wrk.so" },
+  { company: "Router.so", href: "https://router.so" },
   { company: "Components", href: "https://components.work" },
   { company: "Next WP", href: "https://next-wp.com" },
   { company: "Craft Design System", href: "https://craft-ds.com" },
-  { company: "Emoji to Favicon", href: "https://github.com/brijr/favicon" },
   { company: "Meta MCP", href: "https://github.com/brijr/meta-mcp" },
+  { company: "Iris", href: "https://github.com/brijr/iris" },
+  { company: "Payload Starter", href: "https://payloadstarter.dev" },
+  { company: "Emoji to Favicon", href: "https://github.com/brijr/favicon" },
+];
+
+export const CONTENT_ITEMS: WorkItem[] = [
+  { company: "ShipGTM", href: "https://shipgtm.com" },
+  { company: "YouTube", href: "https://youtube.com/@bridgertower" },
+  { company: "X", href: "https://x.com/bridgertower" },
 ];
 
 export const SOCIAL_ITEMS: WorkItem[] = [
-  { company: "X", href: "https://x.com/wipdes" },
   { company: "LinkedIn", href: "https://www.linkedin.com/company/wipdes" },
   { company: "GitHub", href: "https://github.com/wipis" },
-  { company: "Telegram", href: "https://t.me/wipis" },
 ];

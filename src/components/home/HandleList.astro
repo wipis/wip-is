@@ -1,0 +1,33 @@
+---
+import { LINK_CLASSNAME } from "~/lib/constants";
+import type { WorkItem } from "~/lib/work";
+
+interface Props {
+  label: string;
+  items: WorkItem[];
+}
+
+const { label, items } = Astro.props;
+---
+
+<div class="text-[var(--app-fg)] leading-relaxed">
+  <span class="block text-[var(--app-fg-muted)]">{label} —</span>
+  <ul>
+    <slot name="prefix" />
+    {
+      items.map((item) => (
+        <li>
+          {item.company}:{" "}
+          <a
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={LINK_CLASSNAME}
+          >
+            {item.handle ?? item.company}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

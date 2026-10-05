@@ -3,9 +3,11 @@ import { CONTACT_EMAIL } from "~/lib/constants";
 
 interface Props {
   class?: string;
+  /** Button text. Swaps to a confirmation briefly after copying. */
+  label?: string;
 }
 
-const { class: className = "" } = Astro.props;
+const { class: className = "", label = "Email" } = Astro.props;
 ---
 
 <span class="contents">
@@ -14,7 +16,7 @@ const { class: className = "" } = Astro.props;
     data-copy-email
     data-email={CONTACT_EMAIL}
     class={`inline-block font-light text-[var(--app-fg)] cursor-pointer transition-[color,scale] duration-200 ease-out motion-safe:active:scale-[0.97] ${className}`}
-    >Email</button
+    >{label}</button
   >
   <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
 </span>

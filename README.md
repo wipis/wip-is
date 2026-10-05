@@ -1,6 +1,6 @@
 # wip-design.com
 
-Homepage of [wip-design.com](https://wip-design.com) — Astro, Tailwind CSS v4, deployed to Cloudflare Pages.
+Homepage of [wip-design.com](https://wip-design.com) — Astro, Tailwind CSS v4, deployed to the Cloudflare Worker `wip`.
 
 The site is fully prerendered and ships no UI framework: the interactive pieces
 (theme toggle, copy-to-clipboard email, the WIP mark's hover state, smooth
@@ -14,7 +14,7 @@ scrolling) are plain `<script>` tags in their own `.astro` components.
 | `bun build`         | Build the static site to `dist/`     |
 | `bun preview`       | Serve the built site locally         |
 | `bun check`         | Typecheck `.astro` and `.ts` files   |
-| `bun run deploy`    | Build and deploy to Cloudflare Pages |
+| `bun run deploy`    | Build and deploy to the `wip` Worker |
 
 ## Layout
 
@@ -25,8 +25,7 @@ src/
   components/             UI, one .astro file each
   lib/                    Site constants, theme logic, link + mark data
   styles/globals.css      Tailwind entry, theme tokens, font fallback
-functions/_middleware.ts  Canonical-host 301 (Cloudflare Pages Function)
-public/_routes.json       Keeps static assets from invoking that Function
+  worker.ts               Canonical-host 301, then serves dist/ assets
 ```
 
 ## Notes
@@ -35,13 +34,11 @@ public/_routes.json       Keeps static assets from invoking that Function
   before first paint to avoid a flash; everything after that lives in
   `src/lib/theme.ts`. The `localStorage` key and values match the `next-themes`
   setup this site used previously, so existing preferences carry over.
-- **Canonical host.** Several domains point at the same Pages project and
-  Cloudflare has no "primary domain" setting, so `functions/_middleware.ts`
-  301s every non-canonical hostname, including `wip.is`, to `wip-design.com`.
-  `.pages.dev` is exempt so preview deployments stay reachable.
-- **Deploys are direct uploads,** not Git-triggered — pushing to GitHub does
-  not update the site. The Pages project has no Git provider connected, so
-  `bun run deploy` is the only thing that ships it. The script passes
-  `CLOUDFLARE_ACCOUNT_ID` because this login has several accounts and Pages
-  configs reject an `account_id` key.
+- **Canonical host.** Several domains point at the same Worker and Cloudflare
+  has no primary-domain setting, so `src/worker.ts` 301s every non-canonical
+  hostname, including `wip.is`, to `wip-design.com`. `.workers.dev` is exempt
+  so preview URLs stay reachable.
+- **Deploys.** Cloudflare Workers Builds runs `bun run build`, then
+  `npx wrangler deploy`. `bun run deploy` does the same from this machine.
+  The Worker name in `wrangler.jsonc` is `wip`.
 - **Copyright year** in the footer is baked in at build time.

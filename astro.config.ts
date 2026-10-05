@@ -9,9 +9,8 @@ export default defineConfig({
   site: SITE_URL,
   integrations: [react()],
   // Default output is `static` — every page is prerendered to HTML at build
-  // time and `dist/` is uploaded to Cloudflare Pages as plain assets. The only
-  // server-side behaviour left is the canonical-host redirect, which runs as a
-  // Pages Function. See functions/_middleware.ts
+  // time and `dist/` is uploaded as Worker static assets. The only server-side
+  // behaviour left is the canonical-host redirect in src/worker.ts.
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,10 +1,36 @@
 {
-  // Must match the Cloudflare Pages project name — this is a direct-upload
-  // project, so `bun run deploy` is what ships the site; pushing to GitHub
-  // does not.
+  // Must match the Cloudflare Worker. Workers Builds runs `npx wrangler deploy`
+  // after `bun run build`. This login has several accounts, so the account is
+  // pinned here. `workers.dev` stays off; the custom domains below are already
+  // attached to this Worker. Preview URLs stay on for non-production branches.
   "name": "wip",
+  "account_id": "4976e8a5df6887f41b287a83e6b5c18f",
   "compatibility_date": "2025-04-01",
-  "pages_build_output_dir": "dist"
-  // No `account_id` here: Pages configs reject that key. This login has several
-  // accounts, so the deploy script passes CLOUDFLARE_ACCOUNT_ID instead.
+  "workers_dev": false,
+  "preview_urls": true,
+  "main": "src/worker.ts",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Documents hit the canonical-host Worker. Hashed and binary assets are
+    // served directly, the same split public/_routes.json used to describe.
+    "run_worker_first": [
+      "/*",
+      "!/_astro/*",
+      "!/favicon.ico",
+      "!/logo.svg",
+      "!/robots.txt",
+      "!/sitemap.xml",
+      "!/opengraph-image.png",
+      "!/twitter-image.png"
+    ]
+  },
+  "routes": [
+    { "pattern": "wip-design.com", "custom_domain": true },
+    { "pattern": "wip.is", "custom_domain": true },
+    { "pattern": "wipdes.com", "custom_domain": true },
+    { "pattern": "wip0.com", "custom_domain": true },
+    { "pattern": "wip.ad", "custom_domain": true },
+    { "pattern": "wipds.com", "custom_domain": true }
+  ]
 }

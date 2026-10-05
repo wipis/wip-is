@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "deploy": "astro build && CLOUDFLARE_ACCOUNT_ID=4976e8a5df6887f41b287a83e6b5c18f wrangler pages deploy --branch=main"
+    "deploy": "astro build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.0",

@@ -1,5 +1,5 @@
 export const SITE_URL = "https://wip-design.com";
-/** Every other domain on the Pages project 301s here. See functions/_middleware.ts. */
+/** Every other hostname on the Worker 301s here. See src/worker.ts. */
 export const CANONICAL_HOST = "wip-design.com";
 export const SITE_TITLE = "WIP — Design and Engineering Studio";
 export const SITE_DESCRIPTION =

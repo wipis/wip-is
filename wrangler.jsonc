@@ -1,6 +1,6 @@
 {
   // Must match the Cloudflare Pages project name — this is a direct-upload
-  // project, so `pnpm run deploy` is what ships the site; pushing to GitHub
+  // project, so `bun run deploy` is what ships the site; pushing to GitHub
   // does not.
   "name": "wip-website",
   "compatibility_date": "2025-04-01",

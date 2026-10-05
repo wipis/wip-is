@@ -1,10 +1,10 @@
 {
   "name": "wip-design.com",
-  "install": "pnpm install --frozen-lockfile",
+  "install": "bun install --frozen-lockfile",
   "terminals": [
     {
       "name": "dev",
-      "command": "pnpm dev --host",
+      "command": "bun dev --host",
       "description": "Astro dev server with HMR, reachable at http://localhost:4321"
     }
   ],

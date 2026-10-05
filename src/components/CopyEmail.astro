@@ -14,7 +14,7 @@ const { class: className = "" } = Astro.props;
     data-copy-email
     data-email={CONTACT_EMAIL}
     class={`inline-block font-light text-[var(--app-fg)] cursor-pointer transition-[color,scale] duration-200 ease-out motion-safe:active:scale-[0.97] ${className}`}
-    >{CONTACT_EMAIL}</button
+    >Email</button
   >
   <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
 </span>
@@ -28,6 +28,7 @@ const { class: className = "" } = Astro.props;
     const email = button.dataset.email;
     if (!email) continue;
 
+    const label = button.textContent ?? "Email";
     const status = button.parentElement?.querySelector<HTMLElement>(
       "[data-copy-status]"
     );
@@ -46,7 +47,7 @@ const { class: className = "" } = Astro.props;
         if (status) status.textContent = "Email address copied";
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-          button.textContent = email;
+          button.textContent = label;
           if (status) status.textContent = "";
         }, COPIED_DURATION);
       } catch {

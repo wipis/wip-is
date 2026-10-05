@@ -9,14 +9,14 @@ interface Props {
 const { homeHref = "/" } = Astro.props;
 ---
 
-<div class="fixed end-6 top-6 z-50 hidden sm:block">
+<div class="fixed start-6 top-6 z-50 hidden sm:block">
   <a href={homeHref}>
     <h1 class="sr-only">{BRAND_NAME}</h1>
     <WipMark />
   </a>
 </div>
 
-<div class="fixed end-6 top-6 z-50 sm:hidden">
+<div class="fixed start-6 top-6 z-50 sm:hidden">
   <a href={homeHref} class="inline-block p-2.5 -m-2.5">
     <img
       src="/logo.svg"

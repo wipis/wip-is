@@ -101,8 +101,10 @@
         outline-offset: 2px;
     }
 
-    /* Underlines clear the descenders. */
-    a {
+    /* Underlines clear the descenders. The email control is a button, so it
+       needs the same position or its rule sits tighter than the links. */
+    a,
+    button[data-copy-email] {
         text-underline-position: from-font;
         text-decoration-skip-ink: auto;
     }

@@ -1,6 +1,6 @@
 ---
 import ModeToggle from "~/components/ModeToggle.astro";
-import { COPYRIGHT_NAME } from "~/lib/constants";
+import { COPYRIGHT_NAME, DOTTED_LINK_CLASSNAME } from "~/lib/constants";
 
 // Resolved at build time now that the site is prerendered, so the copyright
 // year advances on the next deploy rather than at midnight on New Year's.
@@ -15,10 +15,15 @@ const year = new Date().getFullYear();
   </div>
 
   <div
-    class="pointer-events-auto relative flex items-center justify-end gap-3 p-6"
+    class="pointer-events-auto relative flex items-center justify-start gap-3 p-6"
   >
     <p class="font-light text-sm text-[var(--app-fg-muted)]">
-      &copy; {year} / {COPYRIGHT_NAME}
+      &copy; {year} / <a
+        href="https://bridger.to"
+        target="_blank"
+        rel="noopener noreferrer"
+        class={DOTTED_LINK_CLASSNAME}>{COPYRIGHT_NAME}</a
+      >
     </p>
 
     <ModeToggle />

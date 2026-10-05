@@ -2,7 +2,7 @@
   // Must match the Cloudflare Pages project name — this is a direct-upload
   // project, so `bun run deploy` is what ships the site; pushing to GitHub
   // does not.
-  "name": "wip-website",
+  "name": "wip",
   "compatibility_date": "2025-04-01",
   "pages_build_output_dir": "dist"
   // No `account_id` here: Pages configs reject that key. This login has several

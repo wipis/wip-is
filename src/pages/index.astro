@@ -2,6 +2,7 @@
 import Base from "~/layouts/Base.astro";
 import SiteFooter from "~/components/SiteFooter.astro";
 import SiteHeader from "~/components/SiteHeader.astro";
+import HomeAbout from "~/components/home/HomeAbout.astro";
 import HomeIntro from "~/components/home/HomeIntro.astro";
 import StarMarks from "~/components/home/StarMarks.astro";
 import WorkList from "~/components/home/WorkList.astro";
@@ -24,6 +25,7 @@ import WorkList from "~/components/home/WorkList.astro";
     <article class="relative z-40 px-6 pt-24 pb-24">
       <div class="max-w-md grid gap-12">
         <HomeIntro />
+        <HomeAbout />
         <WorkList />
         <StarMarks />
       </div>

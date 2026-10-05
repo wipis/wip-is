@@ -44,3 +44,18 @@ export const SOCIAL_ITEMS: WorkItem[] = [
   { company: "LinkedIn", href: "https://www.linkedin.com/company/wipdes" },
   { company: "GitHub", href: "https://github.com/wipis" },
 ];
+
+export const SERVICES = [
+  "Brand Identity",
+  "Product Design",
+  "Website Design and Development",
+  "Design Systems",
+  "Front-end Engineering",
+  "Open Source Tooling",
+  "General Ideas for Stuff",
+];
+
+export const CREDITS = [
+  "Site designed and built by WIP",
+  "Typeface: Inter by Rasmus Andersson",
+];

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960">
+  <defs>
+    <linearGradient id="left" x1="0" x2="1">
+      <stop stop-color="#d8d5df"/>
+      <stop offset=".08" stop-color="#faf9fc"/>
+      <stop offset=".9" stop-color="#eeeaf4"/>
+      <stop offset="1" stop-color="#c8c2d5"/>
+    </linearGradient>
+    <linearGradient id="right" x1="0" x2="1">
+      <stop stop-color="#c8c2d5"/>
+      <stop offset=".1" stop-color="#f6f3fa"/>
+      <stop offset=".92" stop-color="#faf9fc"/>
+      <stop offset="1" stop-color="#d8d5df"/>
+    </linearGradient>
+  </defs>
+  <path fill="#080808" d="M0 0h1440v960H0z"/>
+  <path fill="#68636e" d="M241 204h473l6 12 6-12h474v554H726l-6-12-6 12H241z"/>
+  <path fill="url(#left)" d="M250 194c150-10 305-10 470 3v551c-160-13-315-13-470-3z"/>
+  <path fill="url(#right)" d="M720 197c165-13 320-13 470-3v551c-155-10-310-10-470 3z"/>
+  <g fill="#afa0ce">
+    <path d="M286 244h390v3H286zm0 12h390v3H286zm0 12h390v3H286zm0 12h390v3H286zm0 12h390v3H286zm0 12h390v3H286zm0 12h390v3H286zm0 12h390v3H286zm0 12h260v3H286z"/>
+    <path d="M286 392h390v280H286z"/>
+    <path d="M764 242h180v210H764zm210 0h180v210H974zM764 486h390v186H764z"/>
+  </g>
+  <g fill="none" stroke="#ddd5eb" stroke-width="2">
+    <path d="M306 652V432h350v220M336 652V462h290v190M366 652V492h230v160M396 652V522h170v130M426 652V552h110v100"/>
+    <circle cx="854" cy="347" r="65"/><circle cx="1064" cy="347" r="65"/>
+    <path d="m784 652 80-146 90 146 90-146 90 146"/>
+  </g>
+</svg>

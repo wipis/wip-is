@@ -1,0 +1,22 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { WORK_IMAGES } from "~/lib/work-posts";
+
+const images = import.meta.glob<ImageMetadata>("/src/assets/work/*.{png,jpg,webp}", { eager: true, import: "default" });
+---
+
+<div class="grid gap-9">
+  {WORK_IMAGES.length ? WORK_IMAGES.map((post, index) => <figure>
+    <Image src={images[post.image!]} alt={post.imageAlt!} class="block h-auto w-full" loading={index ? "lazy" : "eager"} />
+    <figcaption class="mt-3 text-sm leading-snug">
+      {post.caption || post.project}
+    </figcaption>
+  </figure>) : <figure>
+    <Image src="/work-placeholder.svg" alt="Placeholder showing an open publication on a black background" width={1440} height={960} class="block aspect-[3/2] w-full object-cover" />
+    <figcaption class="mt-3 text-sm leading-snug">
+      <span class="block">01 / Work in progress</span>
+      <span class="text-[var(--app-fg-muted)]">Selected work · Image placeholder</span>
+    </figcaption>
+  </figure>}
+</div>

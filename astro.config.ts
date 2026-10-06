@@ -10,7 +10,7 @@ export default defineConfig({
   integrations: [react()],
   // Default output is `static` — every page is prerendered to HTML at build
   // time and `dist/` is uploaded as Worker static assets. The only server-side
-  // behaviour left is the canonical-host redirect in src/worker.ts.
+  // behavior in production is the canonical-host redirect in src/worker.ts.
   vite: {
     plugins: [tailwindcss()],
   },

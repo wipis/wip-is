@@ -10,15 +10,15 @@ const { label, groups } = Astro.props;
 ---
 
 <div class="text-[var(--app-fg)] leading-relaxed">
-  <span class="block text-[var(--app-fg-muted)]">{label} —</span>
-  <dl class="grid grid-cols-[6.5rem_1fr]">
+  <span class="section-label block text-[var(--app-fg-muted)]">{label}</span>
+  <ul>
     {
       groups.map(({ group, items }) => (
-        <>
-          <dt class="text-[var(--app-fg-muted)]">{group}</dt>
-          <dd>{items.join(", ")}</dd>
-        </>
+        <li>
+          <span class="text-[var(--app-fg-muted)]">{group},</span>{" "}
+          {items.join(", ")}
+        </li>
       ))
     }
-  </dl>
+  </ul>
 </div>

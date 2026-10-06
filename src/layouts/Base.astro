@@ -155,7 +155,7 @@ const structuredData = {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  new Lenis({
+  const options = {
     autoRaf: true,
     duration: prefersReducedMotion ? 0 : 1.1,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -164,5 +164,57 @@ const structuredData = {
     syncTouch: false,
     anchors: true,
     infinite: false,
+  };
+
+  const desktop = window.matchMedia("(min-width: 768px)");
+  const panes = document.querySelectorAll<HTMLElement>("[data-scroll-pane]");
+  let scrollInstances: Lenis[] = [];
+
+  function initScroll() {
+    scrollInstances.forEach((instance) => instance.destroy());
+
+    if (desktop.matches && panes.length) {
+      scrollInstances = Array.from(panes).flatMap((wrapper) => {
+        const content = wrapper.firstElementChild;
+        return content instanceof HTMLElement
+          ? [new Lenis({ ...options, wrapper, content })]
+          : [];
+      });
+    } else {
+      scrollInstances = [new Lenis(options)];
+    }
+  }
+
+  initScroll();
+  desktop.addEventListener("change", initScroll);
+
+  const scrollEvents = new AbortController();
+  const scrollTimers = new Map<HTMLElement, ReturnType<typeof setTimeout>>();
+
+  function showScrollbar(element: HTMLElement) {
+    element.classList.add("scroll-active");
+    clearTimeout(scrollTimers.get(element));
+    scrollTimers.set(element, setTimeout(() => {
+      element.classList.remove("scroll-active");
+      scrollTimers.delete(element);
+    }, 800));
+  }
+
+  const listenerOptions = { passive: true, signal: scrollEvents.signal };
+  window.addEventListener("scroll", () => showScrollbar(document.documentElement), listenerOptions);
+  panes.forEach((pane) => {
+    pane.addEventListener("scroll", () => showScrollbar(pane), listenerOptions);
   });
+
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      desktop.removeEventListener("change", initScroll);
+      scrollInstances.forEach((instance) => instance.destroy());
+      scrollEvents.abort();
+      scrollTimers.forEach((timer, element) => {
+        clearTimeout(timer);
+        element.classList.remove("scroll-active");
+      });
+    });
+  }
 </script>

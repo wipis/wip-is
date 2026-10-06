@@ -15,7 +15,7 @@ const { class: className = "", label = "Email" } = Astro.props;
     type="button"
     data-copy-email
     data-email={CONTACT_EMAIL}
-    class={`inline-block font-light text-[var(--app-fg)] cursor-pointer transition-[color,scale] duration-200 ease-out motion-safe:active:scale-[0.97] ${className}`}
+    class={`inline-block font-light text-[var(--app-fg)] hover:text-[var(--app-accent)] cursor-pointer transition-[color,scale] duration-200 ease-out motion-safe:active:scale-[0.97] ${className}`}
     >{label}</button
   >
   <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>

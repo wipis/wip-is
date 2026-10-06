@@ -12,14 +12,14 @@ export interface WorkItem {
 
 // Client work and our own products in one ledger, sorted by year on render.
 export const WORK_ITEMS: WorkItem[] = [
-  { company: "Shape FS", href: "https://shapefs.com", year: 2026, project: "Product" },
-  { company: "Gui", href: "https://usegui.com", year: 2026, project: "Product" },
+  { company: "Shape FS", href: "https://shapefs.com", year: 2026, project: "Founding Engineer" },
+  { company: "Gui", href: "https://usegui.com", year: 2026, project: "Creator and Maintainer" },
   { company: "MatterOS", href: "https://matter-os.com", year: 2026, project: "Product Engineering" },
   { company: "RxVortex", href: "https://rxvortex.com", year: 2026, project: "AI Engineering" },
-  { company: "Vercel", href: "https://vercel.com", year: 2025, project: "Vercel Academy and GTM Engineering" },
+  { company: "Vercel", href: "https://vercel.com", year: 2025, project: "Vercel Academy" },
   { company: "Laravel", href: "https://laravel.com", year: 2025, project: "Nightwatch Launch" },
   { company: "Browserbase", href: "https://browserbase.com", year: 2025, project: "Browser Use Launch" },
-  { company: "Supermetal", href: "https://supermetal.io", year: 2026, project: "Website" },
+  { company: "Supermetal", href: "https://supermetal.io", year: 2026, project: "Web Design and Development" },
   { company: "Julius", href: "https://julius.ai", year: 2024, project: "Product Design" },
   { company: "Route", href: "https://route.com", year: 2023, project: "Brand Strategy" },
   { company: "Tackle.io", href: "https://tackle.io", year: 2022, project: "Web Development" },
@@ -27,17 +27,17 @@ export const WORK_ITEMS: WorkItem[] = [
   { company: "File Logic", href: "https://filelogic.ai", year: 2025, project: "Product" },
   { company: "Ampry", href: "https://ampry.com", year: 2020, project: "Product" },
   { company: "Swyftfin", href: "https://swyftfin.com", year: 2025, project: "Product" },
-  { company: "Advocate Media", href: "https://advocatemedia.com", year: 2026, project: "Brand and Website" },
+  { company: "Advocate Media", href: "https://advocatemedia.com", year: 2026, project: "Brand and Web Design" },
   { company: "Alpine Codex", href: "https://alpinecodex.com", year: 2024, project: "Marketing Software" },
-  { company: "Payve", href: "https://payve.vercel.app", year: 2026, project: "Brand and Website" },
-  { company: "Confetti Recruiting", href: "https://www.confettirecruiting.com", year: 2026, project: "Brand and Website" },
+  { company: "Payve", href: "https://payve.vercel.app", year: 2026, project: "Brand and Web Design" },
+  { company: "Confetti Recruiting", href: "https://www.confettirecruiting.com", year: 2026, project: "Brand and Web Design" },
   { company: "Strive Pharmacy", href: "https://strivepharmacy.com", year: 2026, project: "Product Engineering" },
   { company: "Noon.Design", href: "https://noon.design", year: 2026, project: "GTM Engineering" },
   { company: "Zion", href: "https://zion.surf", year: 2018, project: "Graphic Design" },
   { company: "BYU", href: "https://byu.edu", year: 2018, project: "Graphic Design and Typesetting" },
   // Our own products and open source.
   { company: "Iris", href: "https://github.com/brijr/iris", year: 2026, project: "Open Source" },
-  { company: "ShipGTM", href: "https://shipgtm.com", year: 2026, project: "Product" },
+  { company: "ShipGTM", href: "https://shipgtm.com", year: 2026, project: "Content Creator" },
   { company: "Wrk.so", href: "https://wrk.so", year: 2025, project: "Product" },
   { company: "Meta MCP", href: "https://github.com/brijr/meta-mcp", year: 2025, project: "Open Source" },
   { company: "Payload Starter", href: "https://payloadstarter.dev", year: 2025, project: "Open Source" },
@@ -59,9 +59,9 @@ export const SOCIAL_ITEMS: WorkItem[] = [
 export const SERVICES: { group: string; items: string[] }[] = [
   { group: "Brand", items: ["Strategy", "Identity", "Advertising", "Typesetting"] },
   { group: "Product", items: ["Zero to One", "Design", "Design Systems"] },
-  { group: "Engineering", items: ["Web Apps", "Mac and iOS Apps", "AI", "GTM", "Open Source"] },
+  { group: "Engineering", items: ["Web Apps", "Native Apps", "AI", "GTM", "Open Source"] },
   { group: "Web", items: ["Design", "Development", "Landing Pages", "SEO"] },
-  { group: "Growth", items: ["Research", "Analytics", "Content"] },
+  { group: "Growth", items: ["Marketing", "Analytics", "Content", "Advertising"] },
 ];
 
 export const CREDITS = [

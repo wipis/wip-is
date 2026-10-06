@@ -16,21 +16,53 @@ import WorkList from "~/components/home/WorkList.astro";
   >
     <SiteHeader />
 
-    <div
-      aria-hidden="true"
-      class="pointer-events-none fixed inset-y-0 start-[calc(30rem+3rem)] z-[60] hidden w-px bg-[var(--app-border)] md:block"
-    >
-    </div>
+    <article class="relative z-40 grid gap-9 md:h-dvh md:grid-cols-[minmax(0,33rem)_minmax(0,1fr)] md:gap-0 md:overflow-hidden">
+      <div
+        role="region"
+        aria-label="Studio information"
+        tabindex="0"
+        data-scroll-pane
+        class="min-h-0 px-6 pt-24 md:overflow-y-auto md:overscroll-contain md:border-r md:border-[var(--app-border)] md:pb-24"
+      >
+        <div class="grid max-w-[30rem] gap-6 text-[1.0625rem]">
+          <HomeIntro />
+          <HomeAbout />
+          <WorkList />
+          <StarMarks />
+        </div>
+      </div>
 
-    <article class="relative z-40 px-6 pt-24 pb-24">
-      <div class="max-w-[30rem] grid gap-12 text-[1.0625rem]">
-        <HomeIntro />
-        <HomeAbout />
-        <WorkList />
-        <StarMarks />
+      <div
+        role="region"
+        aria-label="Work imagery"
+        tabindex="0"
+        data-scroll-pane
+        class="min-h-0 min-w-0 px-6 pb-24 md:overflow-y-auto md:overscroll-contain md:pt-6"
+      >
+        <figure>
+          <img
+            src="/work-placeholder.svg"
+            alt="Placeholder showing an open publication on a black background"
+            width="1440"
+            height="960"
+            class="block aspect-[3/2] w-full object-cover"
+          />
+          <figcaption class="mt-3 text-sm leading-snug">
+            <span class="block">01 / Work in progress</span>
+            <span class="text-[var(--app-fg-muted)]">Selected work · Image placeholder</span>
+          </figcaption>
+        </figure>
       </div>
     </article>
 
     <SiteFooter />
   </main>
 </Base>
+
+<style>
+  @media (min-width: 768px) {
+    .home-page :global(footer) {
+      width: 33rem;
+    }
+  }
+</style>

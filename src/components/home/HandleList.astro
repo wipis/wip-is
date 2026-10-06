@@ -11,7 +11,7 @@ const { label, items } = Astro.props;
 ---
 
 <div class="text-[var(--app-fg)] leading-relaxed">
-  <span class="block text-[var(--app-fg-muted)]">{label} —</span>
+  <span class="section-label block text-[var(--app-fg-muted)]">{label}</span>
   <ul>
     <slot name="prefix" />
     {

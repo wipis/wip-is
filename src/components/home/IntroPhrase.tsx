@@ -9,6 +9,8 @@ const PHRASES = [
   "a state of mind",
   "brand, product, and web",
   "still in progress",
+  "trusting the process",
+  "practicing kaizen",
 ];
 
 const HOLD_MS = 2400;

@@ -1,261 +1,368 @@
 {
-  "revision": 0,
+  "revision": 1,
   "posts": [
     {
-      "company": "Shape FS",
-      "href": "https://shapefs.com",
+      "id": "bridger-tower",
+      "company": "Bridger Tower",
       "year": 2026,
-      "project": "Founding Engineer",
+      "published": false,
+      "project": "Personal Website",
+      "href": "https://bridger.to",
+      "image": "/shot-bridger-to.png",
+      "imageAlt": "Bridger Tower’s personal website with an introduction, social links, and a landscape photograph.",
+      "caption": "Personal website · bridger.to"
+    },
+    {
       "id": "shape-fs",
-      "published": true
+      "company": "Shape FS",
+      "year": 2026,
+      "published": true,
+      "project": "Founding Engineer",
+      "href": "https://shapefs.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Gui",
-      "href": "https://usegui.com",
-      "year": 2026,
-      "project": "Creator and Maintainer",
       "id": "gui",
-      "published": true
+      "company": "Gui",
+      "year": 2026,
+      "published": true,
+      "project": "Creator and Maintainer",
+      "href": "https://usegui.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "MatterOS",
-      "href": "https://matter-os.com",
-      "year": 2026,
-      "project": "Product Engineering",
       "id": "matteros",
-      "published": true
-    },
-    {
-      "company": "RxVortex",
-      "href": "https://rxvortex.com",
+      "company": "MatterOS",
       "year": 2026,
-      "project": "AI Engineering",
-      "id": "rxvortex",
-      "published": true
-    },
-    {
-      "company": "Vercel",
-      "href": "https://vercel.com",
-      "year": 2025,
-      "project": "Vercel Academy",
-      "id": "vercel",
-      "published": true
-    },
-    {
-      "company": "Laravel",
-      "href": "https://laravel.com",
-      "year": 2025,
-      "project": "Nightwatch Launch",
-      "id": "laravel",
-      "published": true
-    },
-    {
-      "company": "Browserbase",
-      "href": "https://browserbase.com",
-      "year": 2025,
-      "project": "Browser Use Launch",
-      "id": "browserbase",
-      "published": true
-    },
-    {
-      "company": "Supermetal",
-      "href": "https://supermetal.io",
-      "year": 2026,
-      "project": "Web Design and Development",
-      "id": "supermetal",
-      "published": true
-    },
-    {
-      "company": "Julius",
-      "href": "https://julius.ai",
-      "year": 2024,
-      "project": "Product Design",
-      "id": "julius",
-      "published": true
-    },
-    {
-      "company": "Route",
-      "href": "https://route.com",
-      "year": 2023,
-      "project": "Brand Strategy",
-      "id": "route",
-      "published": true
-    },
-    {
-      "company": "Tackle.io",
-      "href": "https://tackle.io",
-      "year": 2022,
-      "project": "Web Development",
-      "id": "tackle-io",
-      "published": true
-    },
-    {
-      "company": "Outr.ai",
-      "href": "https://outr.ai",
-      "year": 2024,
-      "project": "Full Service",
-      "id": "outr-ai",
-      "published": true
-    },
-    {
-      "company": "File Logic",
-      "href": "https://filelogic.ai",
-      "year": 2025,
-      "project": "Product",
-      "id": "file-logic",
-      "published": true
-    },
-    {
-      "company": "Ampry",
-      "href": "https://ampry.com",
-      "year": 2020,
-      "project": "Product",
-      "id": "ampry",
-      "published": true
-    },
-    {
-      "company": "Swyftfin",
-      "href": "https://swyftfin.com",
-      "year": 2025,
-      "project": "Product",
-      "id": "swyftfin",
-      "published": true
-    },
-    {
-      "company": "Advocate Media",
-      "href": "https://advocatemedia.com",
-      "year": 2026,
-      "project": "Brand and Web Design",
-      "id": "advocate-media",
-      "published": true
-    },
-    {
-      "company": "Alpine Codex",
-      "href": "https://alpinecodex.com",
-      "year": 2024,
-      "project": "Marketing Software",
-      "id": "alpine-codex",
-      "published": true
-    },
-    {
-      "company": "Payve",
-      "href": "https://payve.vercel.app",
-      "year": 2026,
-      "project": "Brand and Web Design",
-      "id": "payve",
-      "published": true
-    },
-    {
-      "company": "Confetti Recruiting",
-      "href": "https://www.confettirecruiting.com",
-      "year": 2026,
-      "project": "Brand and Web Design",
-      "id": "confetti-recruiting",
-      "published": true
-    },
-    {
-      "company": "Strive Pharmacy",
-      "href": "https://strivepharmacy.com",
-      "year": 2026,
+      "published": true,
       "project": "Product Engineering",
+      "href": "https://matter-os.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "rxvortex",
+      "company": "RxVortex",
+      "year": 2026,
+      "published": true,
+      "project": "AI Engineering",
+      "href": "https://rxvortex.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "vercel",
+      "company": "Vercel",
+      "year": 2025,
+      "published": true,
+      "project": "Vercel Academy",
+      "href": "https://vercel.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "laravel",
+      "company": "Laravel",
+      "year": 2025,
+      "published": true,
+      "project": "Nightwatch Launch",
+      "href": "https://laravel.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "browserbase",
+      "company": "Browserbase",
+      "year": 2025,
+      "published": true,
+      "project": "Browser Use Launch",
+      "href": "https://browserbase.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "supermetal",
+      "company": "Supermetal",
+      "year": 2026,
+      "published": true,
+      "project": "Web Design and Development",
+      "href": "https://supermetal.io",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "julius",
+      "company": "Julius",
+      "year": 2024,
+      "published": true,
+      "project": "Product Design",
+      "href": "https://julius.ai",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "route",
+      "company": "Route",
+      "year": 2023,
+      "published": true,
+      "project": "Brand Strategy",
+      "href": "https://route.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "tackle-io",
+      "company": "Tackle.io",
+      "year": 2022,
+      "published": true,
+      "project": "Web Development",
+      "href": "https://tackle.io",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "outr-ai",
+      "company": "Outr.ai",
+      "year": 2024,
+      "published": true,
+      "project": "Full Service",
+      "href": "https://outr.ai",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "file-logic",
+      "company": "File Logic",
+      "year": 2025,
+      "published": true,
+      "project": "Product",
+      "href": "https://filelogic.ai",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "ampry",
+      "company": "Ampry",
+      "year": 2020,
+      "published": true,
+      "project": "Product",
+      "href": "https://ampry.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "swyftfin",
+      "company": "Swyftfin",
+      "year": 2025,
+      "published": true,
+      "project": "Product",
+      "href": "https://swyftfin.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "advocate-media",
+      "company": "Advocate Media",
+      "year": 2026,
+      "published": true,
+      "project": "Brand and Web Design",
+      "href": "https://advocatemedia.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "alpine-codex",
+      "company": "Alpine Codex",
+      "year": 2024,
+      "published": true,
+      "project": "Marketing Software",
+      "href": "https://alpinecodex.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "payve",
+      "company": "Payve",
+      "year": 2026,
+      "published": true,
+      "project": "Brand and Web Design",
+      "href": "https://payve.vercel.app",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "confetti-recruiting",
+      "company": "Confetti Recruiting",
+      "year": 2026,
+      "published": true,
+      "project": "Brand and Web Design",
+      "href": "https://www.confettirecruiting.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
       "id": "strive-pharmacy",
-      "published": true
+      "company": "Strive Pharmacy",
+      "year": 2026,
+      "published": true,
+      "project": "Product Engineering",
+      "href": "https://strivepharmacy.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Noon.Design",
-      "href": "https://noon.design",
-      "year": 2026,
-      "project": "GTM Engineering",
       "id": "noon-design",
-      "published": true
+      "company": "Noon.Design",
+      "year": 2026,
+      "published": true,
+      "project": "GTM Engineering",
+      "href": "https://noon.design",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Zion",
-      "href": "https://zion.surf",
-      "year": 2018,
-      "project": "Graphic Design",
       "id": "zion",
-      "published": true
-    },
-    {
-      "company": "BYU",
-      "href": "https://byu.edu",
+      "company": "Zion",
       "year": 2018,
-      "project": "Graphic Design and Typesetting",
+      "published": true,
+      "project": "Graphic Design",
+      "href": "https://zion.surf",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
       "id": "byu",
-      "published": true
+      "company": "BYU",
+      "year": 2018,
+      "published": true,
+      "project": "Graphic Design and Typesetting",
+      "href": "https://byu.edu",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Iris",
-      "href": "https://github.com/brijr/iris",
-      "year": 2026,
-      "project": "Open Source",
       "id": "iris",
-      "published": true
-    },
-    {
-      "company": "ShipGTM",
-      "href": "https://shipgtm.com",
+      "company": "Iris",
       "year": 2026,
-      "project": "Content Creator",
+      "published": true,
+      "project": "Open Source",
+      "href": "https://github.com/brijr/iris",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
       "id": "shipgtm",
-      "published": true
+      "company": "ShipGTM",
+      "year": 2026,
+      "published": true,
+      "project": "Content Creator",
+      "href": "https://shipgtm.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Wrk.so",
-      "href": "https://wrk.so",
-      "year": 2025,
-      "project": "Product",
       "id": "wrk-so",
-      "published": true
-    },
-    {
-      "company": "Meta MCP",
-      "href": "https://github.com/brijr/meta-mcp",
+      "company": "Wrk.so",
       "year": 2025,
-      "project": "Open Source",
-      "id": "meta-mcp",
-      "published": true
-    },
-    {
-      "company": "Payload Starter",
-      "href": "https://payloadstarter.dev",
-      "year": 2025,
-      "project": "Open Source",
-      "id": "payload-starter",
-      "published": true
-    },
-    {
-      "company": "Router.so",
-      "href": "https://router.so",
-      "year": 2024,
+      "published": true,
       "project": "Product",
+      "href": "https://wrk.so",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "meta-mcp",
+      "company": "Meta MCP",
+      "year": 2025,
+      "published": true,
+      "project": "Open Source",
+      "href": "https://github.com/brijr/meta-mcp",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
+      "id": "payload-starter",
+      "company": "Payload Starter",
+      "year": 2025,
+      "published": true,
+      "project": "Open Source",
+      "href": "https://payloadstarter.dev",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
+    },
+    {
       "id": "router-so",
-      "published": true
+      "company": "Router.so",
+      "year": 2024,
+      "published": true,
+      "project": "Product",
+      "href": "https://router.so",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Components",
-      "href": "https://components.work",
-      "year": 2024,
-      "project": "Open Source",
       "id": "components",
-      "published": true
+      "company": "Components",
+      "year": 2024,
+      "published": true,
+      "project": "Open Source",
+      "href": "https://components.work",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Next WP",
-      "href": "https://next-wp.com",
-      "year": 2024,
-      "project": "Open Source",
       "id": "next-wp",
-      "published": true
+      "company": "Next WP",
+      "year": 2024,
+      "published": true,
+      "project": "Open Source",
+      "href": "https://next-wp.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     },
     {
-      "company": "Craft Design System",
-      "href": "https://craft-ds.com",
-      "year": 2024,
-      "project": "Open Source",
       "id": "craft-design-system",
-      "published": true
+      "company": "Craft Design System",
+      "year": 2024,
+      "published": true,
+      "project": "Open Source",
+      "href": "https://craft-ds.com",
+      "image": "",
+      "imageAlt": "",
+      "caption": ""
     }
   ]
 }

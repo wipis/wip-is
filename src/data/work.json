@@ -1,0 +1,261 @@
+{
+  "revision": 0,
+  "posts": [
+    {
+      "company": "Shape FS",
+      "href": "https://shapefs.com",
+      "year": 2026,
+      "project": "Founding Engineer",
+      "id": "shape-fs",
+      "published": true
+    },
+    {
+      "company": "Gui",
+      "href": "https://usegui.com",
+      "year": 2026,
+      "project": "Creator and Maintainer",
+      "id": "gui",
+      "published": true
+    },
+    {
+      "company": "MatterOS",
+      "href": "https://matter-os.com",
+      "year": 2026,
+      "project": "Product Engineering",
+      "id": "matteros",
+      "published": true
+    },
+    {
+      "company": "RxVortex",
+      "href": "https://rxvortex.com",
+      "year": 2026,
+      "project": "AI Engineering",
+      "id": "rxvortex",
+      "published": true
+    },
+    {
+      "company": "Vercel",
+      "href": "https://vercel.com",
+      "year": 2025,
+      "project": "Vercel Academy",
+      "id": "vercel",
+      "published": true
+    },
+    {
+      "company": "Laravel",
+      "href": "https://laravel.com",
+      "year": 2025,
+      "project": "Nightwatch Launch",
+      "id": "laravel",
+      "published": true
+    },
+    {
+      "company": "Browserbase",
+      "href": "https://browserbase.com",
+      "year": 2025,
+      "project": "Browser Use Launch",
+      "id": "browserbase",
+      "published": true
+    },
+    {
+      "company": "Supermetal",
+      "href": "https://supermetal.io",
+      "year": 2026,
+      "project": "Web Design and Development",
+      "id": "supermetal",
+      "published": true
+    },
+    {
+      "company": "Julius",
+      "href": "https://julius.ai",
+      "year": 2024,
+      "project": "Product Design",
+      "id": "julius",
+      "published": true
+    },
+    {
+      "company": "Route",
+      "href": "https://route.com",
+      "year": 2023,
+      "project": "Brand Strategy",
+      "id": "route",
+      "published": true
+    },
+    {
+      "company": "Tackle.io",
+      "href": "https://tackle.io",
+      "year": 2022,
+      "project": "Web Development",
+      "id": "tackle-io",
+      "published": true
+    },
+    {
+      "company": "Outr.ai",
+      "href": "https://outr.ai",
+      "year": 2024,
+      "project": "Full Service",
+      "id": "outr-ai",
+      "published": true
+    },
+    {
+      "company": "File Logic",
+      "href": "https://filelogic.ai",
+      "year": 2025,
+      "project": "Product",
+      "id": "file-logic",
+      "published": true
+    },
+    {
+      "company": "Ampry",
+      "href": "https://ampry.com",
+      "year": 2020,
+      "project": "Product",
+      "id": "ampry",
+      "published": true
+    },
+    {
+      "company": "Swyftfin",
+      "href": "https://swyftfin.com",
+      "year": 2025,
+      "project": "Product",
+      "id": "swyftfin",
+      "published": true
+    },
+    {
+      "company": "Advocate Media",
+      "href": "https://advocatemedia.com",
+      "year": 2026,
+      "project": "Brand and Web Design",
+      "id": "advocate-media",
+      "published": true
+    },
+    {
+      "company": "Alpine Codex",
+      "href": "https://alpinecodex.com",
+      "year": 2024,
+      "project": "Marketing Software",
+      "id": "alpine-codex",
+      "published": true
+    },
+    {
+      "company": "Payve",
+      "href": "https://payve.vercel.app",
+      "year": 2026,
+      "project": "Brand and Web Design",
+      "id": "payve",
+      "published": true
+    },
+    {
+      "company": "Confetti Recruiting",
+      "href": "https://www.confettirecruiting.com",
+      "year": 2026,
+      "project": "Brand and Web Design",
+      "id": "confetti-recruiting",
+      "published": true
+    },
+    {
+      "company": "Strive Pharmacy",
+      "href": "https://strivepharmacy.com",
+      "year": 2026,
+      "project": "Product Engineering",
+      "id": "strive-pharmacy",
+      "published": true
+    },
+    {
+      "company": "Noon.Design",
+      "href": "https://noon.design",
+      "year": 2026,
+      "project": "GTM Engineering",
+      "id": "noon-design",
+      "published": true
+    },
+    {
+      "company": "Zion",
+      "href": "https://zion.surf",
+      "year": 2018,
+      "project": "Graphic Design",
+      "id": "zion",
+      "published": true
+    },
+    {
+      "company": "BYU",
+      "href": "https://byu.edu",
+      "year": 2018,
+      "project": "Graphic Design and Typesetting",
+      "id": "byu",
+      "published": true
+    },
+    {
+      "company": "Iris",
+      "href": "https://github.com/brijr/iris",
+      "year": 2026,
+      "project": "Open Source",
+      "id": "iris",
+      "published": true
+    },
+    {
+      "company": "ShipGTM",
+      "href": "https://shipgtm.com",
+      "year": 2026,
+      "project": "Content Creator",
+      "id": "shipgtm",
+      "published": true
+    },
+    {
+      "company": "Wrk.so",
+      "href": "https://wrk.so",
+      "year": 2025,
+      "project": "Product",
+      "id": "wrk-so",
+      "published": true
+    },
+    {
+      "company": "Meta MCP",
+      "href": "https://github.com/brijr/meta-mcp",
+      "year": 2025,
+      "project": "Open Source",
+      "id": "meta-mcp",
+      "published": true
+    },
+    {
+      "company": "Payload Starter",
+      "href": "https://payloadstarter.dev",
+      "year": 2025,
+      "project": "Open Source",
+      "id": "payload-starter",
+      "published": true
+    },
+    {
+      "company": "Router.so",
+      "href": "https://router.so",
+      "year": 2024,
+      "project": "Product",
+      "id": "router-so",
+      "published": true
+    },
+    {
+      "company": "Components",
+      "href": "https://components.work",
+      "year": 2024,
+      "project": "Open Source",
+      "id": "components",
+      "published": true
+    },
+    {
+      "company": "Next WP",
+      "href": "https://next-wp.com",
+      "year": 2024,
+      "project": "Open Source",
+      "id": "next-wp",
+      "published": true
+    },
+    {
+      "company": "Craft Design System",
+      "href": "https://craft-ds.com",
+      "year": 2024,
+      "project": "Open Source",
+      "id": "craft-design-system",
+      "published": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+---
+import Base from "~/layouts/Base.astro";
+import ModeToggle from "~/components/ModeToggle.astro";
+import WorkEditor from "~/components/admin/WorkEditor";
+import { WORK_DOCUMENT } from "~/lib/work-posts";
+import { LINK_CLASSNAME } from "~/lib/constants";
+---
+
+<Base title="Work admin — WIP" noindex>
+  <main id="main" tabindex="-1" class="mx-auto min-h-screen max-w-6xl px-6 py-6 text-[var(--app-fg)] sm:px-10">
+    <header class="mb-12 flex items-center justify-between border-b border-[var(--app-border)] pb-5">
+      <a href="/" class={LINK_CLASSNAME}>WIP / Work admin</a>
+      <div class="flex items-center gap-6"><a href="/" target="_blank" class={LINK_CLASSNAME}>View homepage ↗</a><ModeToggle /></div>
+    </header>
+    {import.meta.env.DEV ? <>
+      <h1 class="text-2xl font-light tracking-tight">Post your work</h1>
+      <p class="mb-10 mt-3 max-w-xl text-[var(--app-fg-muted)]">Save a draft or publish to your local homepage. Changes go live with your next site deployment.</p>
+      <WorkEditor initial={WORK_DOCUMENT} client:load />
+    </> : <>
+      <h1 class="text-2xl">The work editor is local only.</h1>
+      <p class="mt-4 text-[var(--app-fg-muted)]">Open /admin on your local dev site to update your work.</p>
+    </>}
+  </main>
+</Base>

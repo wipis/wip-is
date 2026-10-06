@@ -1,0 +1,20 @@
+---
+import { WORK_IMAGES } from "~/lib/work-posts";
+import { LINK_CLASSNAME } from "~/lib/constants";
+---
+
+<div class="grid gap-9">
+  {WORK_IMAGES.length ? WORK_IMAGES.map((post, index) => <figure>
+    <img src={post.image} alt={post.imageAlt} class="block h-auto w-full" loading={index ? "lazy" : "eager"} />
+    <figcaption class="mt-3 text-sm leading-snug">
+      <span class="block">{String(index + 1).padStart(2, "0")} / {post.href ? <a href={post.href} target="_blank" rel="noopener noreferrer" class={LINK_CLASSNAME}>{post.company}</a> : post.company}</span>
+      <span class="text-[var(--app-fg-muted)]">{post.caption || post.project}</span>
+    </figcaption>
+  </figure>) : <figure>
+    <img src="/work-placeholder.svg" alt="Placeholder showing an open publication on a black background" width="1440" height="960" class="block aspect-[3/2] w-full object-cover" />
+    <figcaption class="mt-3 text-sm leading-snug">
+      <span class="block">01 / Work in progress</span>
+      <span class="text-[var(--app-fg-muted)]">Selected work · Image placeholder</span>
+    </figcaption>
+  </figure>}
+</div>

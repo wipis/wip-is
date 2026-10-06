@@ -23,10 +23,9 @@ import {
 interface Props {
   title?: string;
   description?: string;
-  noindex?: boolean;
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, noindex = false } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 
 const ogImageUrl = `${SITE_URL}${OG_IMAGE_PATH}`;
 const imageAlt = "WIP — Design and Engineering Studio by Bridger Tower";
@@ -103,7 +102,7 @@ const structuredData = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#222222" />
-    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta name="robots" content="index, follow" />
 
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.ico" />

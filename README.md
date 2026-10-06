@@ -2,9 +2,8 @@
 
 Homepage of [wip-design.com](https://wip-design.com) — Astro, Tailwind CSS v4, deployed to the Cloudflare Worker `wip`.
 
-The site is fully prerendered and ships no UI framework: the interactive pieces
-(theme toggle, copy-to-clipboard email, the WIP mark's hover state, smooth
-scrolling) are plain `<script>` tags in their own `.astro` components.
+The public site is fully prerendered. The rotating intro uses React; theme,
+clipboard, and scrolling behavior use Astro scripts.
 
 ## Commands
 
@@ -29,6 +28,12 @@ src/
 ```
 
 ## Notes
+
+- **Work content.** Edit `src/data/work.json` to update the homepage work list
+  and gallery. Set `published` to `true` to display an entry. Images live in
+  `src/assets/work/`; use their `/src/assets/work/filename.png` path and an alt
+  description in the JSON. Astro optimizes these images during the build.
+  Build and deploy to update the live site.
 
 - **Theme.** An inline script in `Base.astro` applies the `light`/`dark` class
   before first paint to avoid a flash; everything after that lives in

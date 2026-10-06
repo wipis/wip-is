@@ -36,7 +36,7 @@ export function parseWorkPost(value: unknown): WorkPost {
   }
   if (typeof data.published !== "boolean") throw new Error("Invalid publication status.");
   const image = text("image", 200);
-  if (image && !/^\/(?:work\/)?[a-z0-9-]+\.(png|jpg|webp)$/.test(image)) throw new Error("Invalid image path.");
+  if (image && !/^\/src\/assets\/work\/[a-z0-9-]+\.(png|jpg|webp)$/.test(image)) throw new Error("Invalid image path.");
   const imageAlt = text("imageAlt", 300);
   if (data.published && image && !imageAlt) throw new Error("Add a description of the image before publishing.");
   const caption = text("caption", 1000);

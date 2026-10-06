@@ -11,7 +11,7 @@ export const CONTACT_EMAIL = "bt@wip.is";
 export const BRAND_NAME = "Work In Progress";
 export const COPYRIGHT_NAME = "Bridger Tower";
 export const LINK_CLASSNAME =
-  "text-[var(--app-accent)] transition-colors duration-150 hover:text-[var(--app-accent-hover)]";
+  "text-[var(--app-fg)] transition-colors duration-150 hover:text-[var(--app-accent)]";
 export const SOCIAL_LINKS = [
   "https://x.com/wipdes",
   "https://www.linkedin.com/company/wipdes",

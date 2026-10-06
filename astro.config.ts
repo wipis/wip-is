@@ -4,23 +4,13 @@ import { defineConfig } from "astro/config";
 
 import { SITE_URL } from "./src/lib/constants";
 
-let localEditor = false;
-
 export default defineConfig({
   // Absolute URLs are built from this (canonical link, OG tags, JSON-LD).
   site: SITE_URL,
-  integrations: [react(), {
-    name: "local-work-editor",
-    hooks: {
-      "astro:config:setup": ({ command }) => { localEditor = command === "dev"; },
-      "astro:route:setup": ({ route }) => {
-        if (route.component.endsWith("/api/admin/work.json.ts")) route.prerender = !localEditor;
-      },
-    },
-  }],
+  integrations: [react()],
   // Default output is `static` — every page is prerendered to HTML at build
   // time and `dist/` is uploaded as Worker static assets. The only server-side
-  // behaviour left is the canonical-host redirect in src/worker.ts.
+  // behavior in production is the canonical-host redirect in src/worker.ts.
   vite: {
     plugins: [tailwindcss()],
   },

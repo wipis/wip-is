@@ -2,6 +2,7 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { WORK_IMAGES } from "~/lib/work-posts";
+import WorkShotCarousel from "./WorkShotCarousel.astro";
 
 const images = import.meta.glob<ImageMetadata>("/src/assets/work/*.{png,jpg,webp}", { eager: true, import: "default" });
 const themed = (path: string, theme: "dark" | "light") => images[path.replace("{theme}", theme)]!;
@@ -9,7 +10,12 @@ const themed = (path: string, theme: "dark" | "light") => images[path.replace("{
 
 <div class="grid gap-9">
   {WORK_IMAGES.length ? WORK_IMAGES.map((post, index) => <figure>
-    {post.images?.length ? <div class="grid gap-3">
+    {post.images && post.images.length > 1 ? <WorkShotCarousel
+      shots={post.images.map((path) => path.includes("{theme}") ? { light: themed(path, "light"), dark: themed(path, "dark") } : { light: images[path] })}
+      label={post.company}
+      alt={post.imageAlt!}
+      eager={index === 0}
+    /> : post.images?.length ? <div class="grid gap-3">
       {/* Each shot comes in a dark and a light version; the one matching the site's theme shows. The first image's alt describes the set. */}
       {post.images.map((path, i) => path.includes("{theme}") ? <>
         <Image src={themed(path, "light")} alt={i ? "" : post.imageAlt!} class="block h-auto w-full dark:hidden" loading={index || i ? "lazy" : "eager"} />

@@ -1,0 +1,144 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  shots: { light: ImageMetadata; dark?: ImageMetadata }[];
+  label: string;
+  alt: string;
+  eager?: boolean;
+}
+
+const { shots, label, alt, eager = false } = Astro.props;
+---
+
+<div
+  class="shot-carousel"
+  data-shot-carousel
+  role="region"
+  aria-roledescription="carousel"
+  aria-label={`${label} shots`}
+  style={`aspect-ratio: ${shots[0].light.width} / ${shots[0].light.height}`}
+>
+  {shots.map((shot, index) => (
+    <div data-shot-slide hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${shots.length}`}>
+      <Image src={shot.light} alt={alt} class={shot.dark ? "block h-full w-full object-contain dark:hidden" : "block h-full w-full object-contain"} loading={eager && index === 0 ? "eager" : "lazy"} />
+      {shot.dark && <Image src={shot.dark} alt={alt} class="hidden h-full w-full object-contain dark:block" loading={eager && index === 0 ? "eager" : "lazy"} />}
+    </div>
+  ))}
+  <button type="button" class="shot-control shot-previous" data-shot-direction="-1" aria-label={`Previous ${label} shot`}>
+    <span aria-hidden="true">←</span>
+  </button>
+  <button type="button" class="shot-control shot-next" data-shot-direction="1" aria-label={`Next ${label} shot`}>
+    <span aria-hidden="true">→</span>
+  </button>
+  <span class="shot-cursor" aria-hidden="true" data-shot-cursor>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M4 12h16M13 5l7 7-7 7" />
+    </svg>
+  </span>
+  <span class="shot-count" data-shot-count aria-live="polite" aria-atomic="true">1 / {shots.length}</span>
+</div>
+
+<style>
+  .shot-carousel { position: relative; }
+  [data-shot-slide] { width: 100%; height: 100%; }
+  [data-shot-slide][hidden] { display: none; }
+  .shot-control {
+    display: none;
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    background: transparent;
+    color: var(--app-fg);
+    border: 0;
+  }
+  [data-ready] .shot-control { display: block; }
+  .shot-previous { left: 0; }
+  .shot-next { right: 0; }
+  .shot-control span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--app-bg);
+    font-size: 24px;
+  }
+  .shot-previous span { left: 12px; }
+  .shot-next span { right: 12px; }
+  .shot-control:focus-visible { outline-offset: -3px; }
+  .shot-cursor {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    place-items: center;
+    background: var(--app-bg);
+    color: var(--app-fg);
+    transform: translate(-50%, -50%);
+  }
+  [data-direction="-1"] .shot-cursor svg { transform: rotate(180deg); }
+  .shot-count {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 4px 8px;
+    background: var(--app-bg);
+    color: var(--app-fg-muted);
+    border-radius: 999px;
+    font-size: 12px;
+    pointer-events: none;
+  }
+  @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    .shot-control { cursor: none; }
+    .shot-control span { display: none; }
+    .shot-control:focus-visible span { display: grid; }
+    [data-hovering] .shot-cursor { display: grid; }
+  }
+</style>
+
+<script>
+  for (const carousel of document.querySelectorAll<HTMLElement>("[data-shot-carousel]")) {
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-shot-slide]"));
+    const cursor = carousel.querySelector<HTMLElement>("[data-shot-cursor]")!;
+    const count = carousel.querySelector<HTMLElement>("[data-shot-count]")!;
+    let current = 0;
+
+    const advance = (direction: number) => {
+      slides[current].hidden = true;
+      current = (current + direction + slides.length) % slides.length;
+      slides[current].hidden = false;
+      count.textContent = `${current + 1} / ${slides.length}`;
+    };
+
+    for (const button of carousel.querySelectorAll<HTMLButtonElement>("[data-shot-direction]")) {
+      button.addEventListener("click", () => advance(Number(button.dataset.shotDirection)));
+      button.addEventListener("pointermove", (event) => {
+        if (event.pointerType !== "mouse") return;
+        const bounds = carousel.getBoundingClientRect();
+        cursor.style.left = `${event.clientX - bounds.left}px`;
+        cursor.style.top = `${event.clientY - bounds.top}px`;
+        carousel.dataset.direction = button.dataset.shotDirection;
+        carousel.setAttribute("data-hovering", "");
+      });
+    }
+    carousel.addEventListener("pointerleave", () => carousel.removeAttribute("data-hovering"));
+    // Scrolling moves the image away from the cursor, so wait for a new move.
+    window.addEventListener("scroll", () => carousel.removeAttribute("data-hovering"), { capture: true, passive: true });
+    carousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        advance(event.key === "ArrowLeft" ? -1 : 1);
+      }
+    });
+    carousel.setAttribute("data-ready", "");
+  }
+</script>

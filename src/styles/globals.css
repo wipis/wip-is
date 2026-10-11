@@ -134,7 +134,7 @@
     html.scroll-active,
     [data-scroll-pane].scroll-active {
         --scrollbar-thumb: var(--app-fg-muted);
-        --scrollbar-track: var(--app-border);
+        --scrollbar-track: transparent;
         transition-duration: 150ms;
     }
 
@@ -145,6 +145,22 @@
         }
     }
 
+    html::-webkit-scrollbar,
+    [data-scroll-pane]::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    html::-webkit-scrollbar-button,
+    [data-scroll-pane]::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    html::-webkit-scrollbar-corner,
+    [data-scroll-pane]::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
     html::-webkit-scrollbar-track,
     [data-scroll-pane]::-webkit-scrollbar-track {
         background: var(--scrollbar-track);
@@ -153,7 +169,9 @@
     html::-webkit-scrollbar-thumb,
     [data-scroll-pane]::-webkit-scrollbar-thumb {
         background: var(--scrollbar-thumb);
-        border-radius: 0;
+        background-clip: padding-box;
+        border: 3px solid transparent;
+        border-radius: 999px;
     }
 
     @supports not selector(::-webkit-scrollbar) {
@@ -161,6 +179,25 @@
         [data-scroll-pane] {
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        }
+    }
+
+    @media (forced-colors: active) {
+        html,
+        [data-scroll-pane] {
+            scrollbar-color: auto;
+            scrollbar-width: auto;
+        }
+
+        html::-webkit-scrollbar,
+        [data-scroll-pane]::-webkit-scrollbar {
+            width: auto;
+            height: auto;
+        }
+
+        html::-webkit-scrollbar-thumb,
+        [data-scroll-pane]::-webkit-scrollbar-thumb {
+            background: CanvasText;
         }
     }
 

@@ -87,6 +87,7 @@ const { shots, label, alt, eager = false } = Astro.props;
   }
   [data-direction="-1"] .shot-cursor svg { transform: rotate(180deg); }
   .shot-count {
+    opacity: 0;
     position: absolute;
     bottom: 12px;
     right: 12px;
@@ -97,6 +98,7 @@ const { shots, label, alt, eager = false } = Astro.props;
     font-size: 12px;
     pointer-events: none;
   }
+  .shot-carousel:hover .shot-count { opacity: 1; }
   @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
     .shot-control { cursor: none; }
     .shot-control span { display: none; }

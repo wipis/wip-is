@@ -40,34 +40,24 @@ const { src, alt, class: className, loading = "lazy" } = Astro.props;
 </style>
 
 <script>
-  const visible = new WeakSet<Element>();
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      const frame = entry.target as HTMLElement;
-      if (!entry.isIntersecting) {
-        visible.delete(frame);
-        frame.removeAttribute("data-loaded");
-        continue;
-      }
-      visible.add(frame);
-      const image = frame.querySelector<HTMLImageElement>(".image-full")!;
-      // decode() also handles cached images and avoids revealing partial pixels.
-      image.decode().then(() => {
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          if (visible.has(frame) && image.complete && image.naturalWidth) {
-            frame.setAttribute("data-loaded", "");
-          }
-        }));
-      }).catch(() => {
-        // Keep the small preview available if the full image fails to load.
-      });
-    }
-  });
-
   for (const frame of document.querySelectorAll<HTMLElement>("[data-async-image]")) {
-    frame.setAttribute("data-loading", "");
-    observer.observe(frame);
-  }
+    const image = frame.querySelector<HTMLImageElement>(".image-full")!;
+    // Cached images display immediately. Loaded state persists across slides.
+    if (image.complete && image.naturalWidth) {
+      frame.setAttribute("data-loaded", "");
+      continue;
+    }
 
-  if (import.meta.hot) import.meta.hot.dispose(() => observer.disconnect());
+    frame.setAttribute("data-loading", "");
+    image.addEventListener("load", async () => {
+      try {
+        await image.decode();
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          frame.setAttribute("data-loaded", "");
+        }));
+      } catch {
+        // Keep the small preview available if the full image fails to decode.
+      }
+    }, { once: true });
+  }
 </script>

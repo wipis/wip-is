@@ -15,17 +15,16 @@ import WorkGallery from "~/components/home/WorkGallery.astro";
     tabindex="-1"
     class="home-page bg-[--app-bg] min-h-screen scroll-mt-6 text-[--app-fg]"
   >
-    <SiteHeader />
-
     <article class="relative z-40 grid gap-9 md:h-dvh md:grid-cols-[minmax(0,33rem)_minmax(0,1fr)] md:gap-0 md:overflow-hidden">
       <div
         role="region"
         aria-label="Studio information"
         tabindex="0"
         data-scroll-pane
-        class="min-h-0 px-6 pt-24 md:overflow-y-auto md:overscroll-contain md:border-r md:border-[var(--app-border)] md:pb-24"
+        class="min-h-0 px-6 md:overflow-y-auto md:overscroll-contain md:border-r md:border-[var(--app-border)] md:pb-24"
       >
-        <div class="grid max-w-[30rem] gap-6 text-[1.0625rem]">
+        <div class="relative grid max-w-[30rem] gap-6 pt-24 text-[1.0625rem]">
+          <SiteHeader />
           <HomeIntro />
           <HomeAbout />
           <WorkList />

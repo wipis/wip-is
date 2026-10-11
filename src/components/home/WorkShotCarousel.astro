@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import AsyncImage from "../AsyncImage.astro";
 
 interface Props {
   shots: { light: ImageMetadata; dark?: ImageMetadata }[];
@@ -22,8 +22,8 @@ const { shots, label, alt, eager = false } = Astro.props;
 >
   {shots.map((shot, index) => (
     <div data-shot-slide hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${shots.length}`}>
-      <Image src={shot.light} alt={alt} class={shot.dark ? "block h-full w-full object-contain dark:hidden" : "block h-full w-full object-contain"} loading={eager && index === 0 ? "eager" : "lazy"} />
-      {shot.dark && <Image src={shot.dark} alt={alt} class="hidden h-full w-full object-contain dark:block" loading={eager && index === 0 ? "eager" : "lazy"} />}
+      <AsyncImage src={shot.light} alt={alt} class={shot.dark ? "block h-full w-full object-contain dark:hidden" : "block h-full w-full object-contain"} loading={eager && index === 0 ? "eager" : "lazy"} />
+      {shot.dark && <AsyncImage src={shot.dark} alt={alt} class="hidden h-full w-full object-contain dark:block" loading={eager && index === 0 ? "eager" : "lazy"} />}
     </div>
   ))}
   <button type="button" class="shot-control shot-previous" data-shot-direction="-1" aria-label={`Previous ${label} shot`}>

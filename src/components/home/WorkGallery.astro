@@ -4,11 +4,18 @@ import { Image } from "astro:assets";
 import { WORK_IMAGES } from "~/lib/work-posts";
 
 const images = import.meta.glob<ImageMetadata>("/src/assets/work/*.{png,jpg,webp}", { eager: true, import: "default" });
+const themed = (path: string, theme: "dark" | "light") => images[path.replace("{theme}", theme)]!;
 ---
 
 <div class="grid gap-9">
   {WORK_IMAGES.length ? WORK_IMAGES.map((post, index) => <figure>
-    <Image src={images[post.image!]} alt={post.imageAlt!} class="block h-auto w-full" loading={index ? "lazy" : "eager"} />
+    {post.images?.length ? <div class="grid gap-3">
+      {/* Each shot comes in a dark and a light version; the one matching the site's theme shows. The first image's alt describes the set. */}
+      {post.images.map((path, i) => path.includes("{theme}") ? <>
+        <Image src={themed(path, "light")} alt={i ? "" : post.imageAlt!} class="block h-auto w-full dark:hidden" loading={index || i ? "lazy" : "eager"} />
+        <Image src={themed(path, "dark")} alt={i ? "" : post.imageAlt!} class="hidden h-auto w-full dark:block" loading={index || i ? "lazy" : "eager"} />
+      </> : <Image src={images[path]!} alt={i ? "" : post.imageAlt!} class="block h-auto w-full" loading={index || i ? "lazy" : "eager"} />)}
+    </div> : <Image src={images[post.image!]} alt={post.imageAlt!} class="block h-auto w-full" loading={index ? "lazy" : "eager"} />}
     <figcaption class="mt-3 text-sm leading-snug">
       {post.caption || post.project}
     </figcaption>

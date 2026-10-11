@@ -1,5 +1,5 @@
 {
-  "revision": 4,
+  "revision": 5,
   "posts": [
     {
       "id": "bridger-tower",
@@ -20,8 +20,13 @@
       "project": "Founding Engineer",
       "href": "https://shapefs.com",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Shape FS, a file system for teams and their agents: the homepage, the agent connection page, and the pricing page on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/shape-fs-1-{theme}.webp",
+        "/src/assets/work/shape-fs-2-{theme}.webp",
+        "/src/assets/work/shape-fs-3-{theme}.webp"
+      ]
     },
     {
       "id": "gui",
@@ -31,8 +36,13 @@
       "project": "Creator and Maintainer",
       "href": "https://usegui.com",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Gui, a Mac app for web design: the homepage, its demo, and the feature walkthrough on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/gui-1-{theme}.webp",
+        "/src/assets/work/gui-2-{theme}.webp",
+        "/src/assets/work/gui-3-{theme}.webp"
+      ]
     },
     {
       "id": "matteros",
@@ -152,8 +162,13 @@
       "project": "Product",
       "href": "https://filelogic.ai",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "File Logic: the homepage, the case view from the app up close, and the security page on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/file-logic-1-{theme}.webp",
+        "/src/assets/work/file-logic-2-{theme}.webp",
+        "/src/assets/work/file-logic-3-{theme}.webp"
+      ]
     },
     {
       "id": "ampry",
@@ -196,8 +211,13 @@
       "project": "Marketing Software",
       "href": "https://alpinecodex.com",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Alpine Codex: the studio's single-page site with a black-and-white mountain photograph, up close, and on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/alpine-codex-1-{theme}.webp",
+        "/src/assets/work/alpine-codex-2-{theme}.webp",
+        "/src/assets/work/alpine-codex-3-{theme}.webp"
+      ]
     },
     {
       "id": "payve",
@@ -284,8 +304,13 @@
       "project": "Content Creator",
       "href": "https://shipgtm.com",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "ShipGTM, a publication for AI-native go-to-market: the homepage, its channels, and the hosts and contact page on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/shipgtm-1-{theme}.webp",
+        "/src/assets/work/shipgtm-2-{theme}.webp",
+        "/src/assets/work/shipgtm-3-{theme}.webp"
+      ]
     },
     {
       "id": "wrk-so",
@@ -295,8 +320,13 @@
       "project": "Product",
       "href": "https://wrk.so",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Wrk.so, portfolios for creatives: the homepage, a masonry portfolio template, and a grid template on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/wrk-so-1-{theme}.webp",
+        "/src/assets/work/wrk-so-2-{theme}.webp",
+        "/src/assets/work/wrk-so-3-{theme}.webp"
+      ]
     },
     {
       "id": "meta-mcp",
@@ -328,8 +358,13 @@
       "project": "Product",
       "href": "https://router.so",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Router.so: the homepage, the lead dashboard up close, and the pricing page on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/router-so-1-{theme}.webp",
+        "/src/assets/work/router-so-2-{theme}.webp",
+        "/src/assets/work/router-so-3-{theme}.webp"
+      ]
     },
     {
       "id": "components",
@@ -339,8 +374,13 @@
       "project": "Open Source",
       "href": "https://components.work",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Components: the component library homepage, a pricing component, and an FAQ component on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/components-1-{theme}.webp",
+        "/src/assets/work/components-2-{theme}.webp",
+        "/src/assets/work/components-3-{theme}.webp"
+      ]
     },
     {
       "id": "next-wp",
@@ -361,8 +401,13 @@
       "project": "Open Source",
       "href": "https://craft-ds.com",
       "image": "",
-      "imageAlt": "",
-      "caption": ""
+      "imageAlt": "Craft Design System: the homepage, an example article's type styles, and the code documentation on a MacBook beside the mobile site.",
+      "caption": "",
+      "images": [
+        "/src/assets/work/craft-design-system-1-{theme}.webp",
+        "/src/assets/work/craft-design-system-2-{theme}.webp",
+        "/src/assets/work/craft-design-system-3-{theme}.webp"
+      ]
     }
   ]
 }

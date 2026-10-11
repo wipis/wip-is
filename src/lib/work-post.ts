@@ -4,6 +4,8 @@ export interface WorkPost extends WorkItem {
   id: string;
   published: boolean;
   image?: string;
+  /** Product shots shown in order. `{theme}` in a path is replaced with `dark` or `light`. */
+  images?: string[];
   imageAlt?: string;
   caption?: string;
 }
@@ -37,10 +39,17 @@ export function parseWorkPost(value: unknown): WorkPost {
   if (typeof data.published !== "boolean") throw new Error("Invalid publication status.");
   const image = text("image", 200);
   if (image && !/^\/src\/assets\/work\/[a-z0-9-]+\.(png|jpg|webp)$/.test(image)) throw new Error("Invalid image path.");
+  const images = data.images ?? [];
+  if (!Array.isArray(images) || images.length > 12) throw new Error("Invalid images.");
+  for (const path of images) {
+    if (typeof path !== "string" || !/^\/src\/assets\/work\/[a-z0-9-]+(\{theme\}[a-z0-9-]*)?\.(png|jpg|webp)$/.test(path)) {
+      throw new Error("Invalid image path.");
+    }
+  }
   const imageAlt = text("imageAlt", 300);
-  if (data.published && image && !imageAlt) throw new Error("Add a description of the image before publishing.");
+  if (data.published && (image || images.length) && !imageAlt) throw new Error("Add a description of the image before publishing.");
   const caption = text("caption", 1000);
-  return { id, company, year, published: data.published, project, href, image, imageAlt, caption };
+  return { id, company, year, published: data.published, project, href, image, images, imageAlt, caption };
 }
 
 export function parseWorkDocument(value: unknown): WorkDocument {

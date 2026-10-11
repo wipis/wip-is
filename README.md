@@ -1,6 +1,6 @@
-# wip-design.com
+# wip.is
 
-Homepage of [wip-design.com](https://wip-design.com) — Astro, Tailwind CSS v4, deployed to the Cloudflare Worker `wip`.
+Homepage of [wip.is](https://wip.is) — Astro, Tailwind CSS v4, deployed to the Cloudflare Worker `wip`.
 
 The public site is fully prerendered. The rotating intro uses React; theme,
 clipboard, and scrolling behavior use Astro scripts.
@@ -41,7 +41,7 @@ src/
   setup this site used previously, so existing preferences carry over.
 - **Canonical host.** Several domains point at the same Worker and Cloudflare
   has no primary-domain setting, so `src/worker.ts` 301s every non-canonical
-  hostname, including `wip.is`, to `wip-design.com`. `.workers.dev` is exempt
+  hostname, including `wip-design.com`, to `wip.is`. `.workers.dev` is exempt
   so preview URLs stay reachable.
 - **Deploys.** Cloudflare Workers Builds runs `bun run build`, then
   `npx wrangler deploy`. `bun run deploy` does the same from this machine.

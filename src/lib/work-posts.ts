@@ -6,4 +6,5 @@ export const PUBLISHED_WORK = WORK_DOCUMENT.posts
   .filter((post) => post.published)
   .sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
 
+export const LISTED_WORK = PUBLISHED_WORK.filter((post) => post.listed !== false);
 export const WORK_IMAGES = PUBLISHED_WORK.filter((post) => post.image || post.images?.length);

@@ -6,11 +6,17 @@
       "company": "Bridger Tower",
       "year": 2026,
       "published": true,
+      "listed": false,
       "project": "Personal Website",
       "href": "https://bridger.to",
-      "image": "/src/assets/work/shot-bridger-to.png",
-      "imageAlt": "Bridger Tower’s personal website with an introduction, social links, and a landscape photograph.",
-      "caption": "Personal website of Bridger Tower"
+      "image": "",
+      "imageAlt": "Bridger Tower’s personal website: the homepage with an introduction, links, and a landscape photograph, the posts index up close, and a post with code on a MacBook beside the work index on an iPhone.",
+      "caption": "Personal website of Bridger Tower",
+      "images": [
+        "/src/assets/work/bridger-to-1-{theme}.webp",
+        "/src/assets/work/bridger-to-2-{theme}.webp",
+        "/src/assets/work/bridger-to-3-{theme}.webp"
+      ]
     },
     {
       "id": "shape-fs",
@@ -225,7 +231,7 @@
       "year": 2026,
       "published": true,
       "project": "Brand and Web Design",
-      "href": "https://payve.vercel.app",
+      "href": "https://getpayve.com/",
       "image": "",
       "imageAlt": "",
       "caption": ""

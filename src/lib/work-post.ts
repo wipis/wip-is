@@ -3,6 +3,8 @@ import type { WorkItem } from "./work";
 export interface WorkPost extends WorkItem {
   id: string;
   published: boolean;
+  /** Set to false to show the shots in the gallery without a line in the Work list. */
+  listed?: boolean;
   image?: string;
   /** Product shots shown in order. `{theme}` in a path is replaced with `dark` or `light`. */
   images?: string[];
@@ -37,6 +39,8 @@ export function parseWorkPost(value: unknown): WorkPost {
     throw new Error("Enter a year between 1900 and 2100.");
   }
   if (typeof data.published !== "boolean") throw new Error("Invalid publication status.");
+  if (data.listed !== undefined && typeof data.listed !== "boolean") throw new Error("Invalid listed status.");
+  const listed = data.listed !== false;
   const image = text("image", 200);
   if (image && !/^\/src\/assets\/work\/[a-z0-9-]+\.(png|jpg|webp)$/.test(image)) throw new Error("Invalid image path.");
   const images = data.images ?? [];
@@ -49,7 +53,7 @@ export function parseWorkPost(value: unknown): WorkPost {
   const imageAlt = text("imageAlt", 300);
   if (data.published && (image || images.length) && !imageAlt) throw new Error("Add a description of the image before publishing.");
   const caption = text("caption", 1000);
-  return { id, company, year, published: data.published, project, href, image, images, imageAlt, caption };
+  return { id, company, year, published: data.published, listed, project, href, image, images, imageAlt, caption };
 }
 
 export function parseWorkDocument(value: unknown): WorkDocument {

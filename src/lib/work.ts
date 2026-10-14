@@ -11,7 +11,7 @@ export interface WorkItem {
 }
 
 // Client work and our own products in one ledger, sorted by year on render.
-export { PUBLISHED_WORK as WORK_ITEMS } from "./work-posts";
+export { LISTED_WORK as WORK_ITEMS } from "./work-posts";
 
 export const SOCIAL_ITEMS: WorkItem[] = [
   { company: "Bridger X", href: "https://x.com/bridgertower", handle: "@bridgertower" },

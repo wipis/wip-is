@@ -29,9 +29,9 @@
       "imageAlt": "The Shape FS app: a moodboard folder of posters, a file page with tags, details and versions, and a brand folder on a MacBook beside a poster on an iPhone.",
       "caption": "",
       "images": [
-        "/src/assets/work/shape-fs-1-{theme}.webp",
-        "/src/assets/work/shape-fs-2-{theme}.webp",
-        "/src/assets/work/shape-fs-3-{theme}.webp"
+        "/src/assets/work/shape-fs-app-1-{theme}.webp",
+        "/src/assets/work/shape-fs-app-2-{theme}.webp",
+        "/src/assets/work/shape-fs-app-3-{theme}.webp"
       ]
     },
     {
@@ -45,9 +45,9 @@
       "imageAlt": "The Gui Mac app: an element picked in the live preview with a change written in the chat, the finished change with its before and after, and the page in the mobile viewport.",
       "caption": "",
       "images": [
-        "/src/assets/work/gui-1-{theme}.webp",
-        "/src/assets/work/gui-2-{theme}.webp",
-        "/src/assets/work/gui-3-{theme}.webp"
+        "/src/assets/work/gui-app-1-{theme}.webp",
+        "/src/assets/work/gui-app-2-{theme}.webp",
+        "/src/assets/work/gui-app-3-{theme}.webp"
       ]
     },
     {

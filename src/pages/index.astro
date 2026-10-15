@@ -3,6 +3,7 @@ import Base from "~/layouts/Base.astro";
 import SiteFooter from "~/components/SiteFooter.astro";
 import SiteHeader from "~/components/SiteHeader.astro";
 import HomeAbout from "~/components/home/HomeAbout.astro";
+import HomeHero from "~/components/home/HomeHero.astro";
 import HomeIntro from "~/components/home/HomeIntro.astro";
 import StarMarks from "~/components/home/StarMarks.astro";
 import WorkList from "~/components/home/WorkList.astro";
@@ -10,10 +11,12 @@ import WorkGallery from "~/components/home/WorkGallery.astro";
 ---
 
 <Base>
+  <HomeHero />
+
   <main
     id="main"
     tabindex="-1"
-    class="home-page bg-[--app-bg] min-h-screen scroll-mt-6 text-[--app-fg]"
+    class="home-page bg-[--app-bg] min-h-screen text-[--app-fg]"
   >
     <article class="relative z-40 grid gap-9 md:h-dvh md:grid-cols-[minmax(0,33rem)_minmax(0,1fr)] md:gap-0 md:overflow-hidden">
       <div

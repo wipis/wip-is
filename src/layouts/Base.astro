@@ -168,19 +168,29 @@ const structuredData = {
 
   const desktop = window.matchMedia("(min-width: 768px)");
   const panes = document.querySelectorAll<HTMLElement>("[data-scroll-pane]");
+  // The home page opens on a full-screen hero above the panes. While any of it
+  // is on screen the page scrolls natively and the panes stay put.
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  const heroInView = () => !!hero && !hero.hidden && window.scrollY < hero.offsetHeight - 1;
   let scrollInstances: Lenis[] = [];
+  let panesActive = false;
 
   function initScroll() {
     scrollInstances.forEach((instance) => instance.destroy());
 
     if (desktop.matches && panes.length) {
-      scrollInstances = Array.from(panes).flatMap((wrapper) => {
-        const content = wrapper.firstElementChild;
-        return content instanceof HTMLElement
-          ? [new Lenis({ ...options, wrapper, content })]
-          : [];
-      });
+      panesActive = !heroInView();
+      document.documentElement.toggleAttribute("data-hero-in-view", !panesActive);
+      scrollInstances = panesActive
+        ? Array.from(panes).flatMap((wrapper) => {
+            const content = wrapper.firstElementChild;
+            return content instanceof HTMLElement
+              ? [new Lenis({ ...options, wrapper, content })]
+              : [];
+          })
+        : [];
     } else {
+      document.documentElement.removeAttribute("data-hero-in-view");
       scrollInstances = [new Lenis(options)];
     }
   }
@@ -189,6 +199,29 @@ const structuredData = {
   desktop.addEventListener("change", initScroll);
 
   const scrollEvents = new AbortController();
+
+  if (hero) {
+    // Once the visitor scrolls past the hero it's gone for the rest of the
+    // visit: it's removed and the scroll shifts by its height, so the view
+    // stays put and there's nothing above to scroll back up to.
+    window.addEventListener("scroll", () => {
+      if (hero.hidden || window.scrollY < hero.offsetHeight - 1) return;
+      const height = hero.offsetHeight;
+      hero.hidden = true;
+      window.scrollTo(0, Math.max(0, window.scrollY - height));
+      initScroll();
+    }, { passive: true, signal: scrollEvents.signal });
+
+    hero.querySelector("[data-hero-next]")?.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (desktop.matches) {
+        window.scrollTo({ top: hero.offsetHeight, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      } else {
+        scrollInstances[0]?.scrollTo(hero.offsetHeight);
+      }
+    }, { signal: scrollEvents.signal });
+  }
   const scrollTimers = new Map<HTMLElement, ReturnType<typeof setTimeout>>();
 
   function showScrollbar(element: HTMLElement) {

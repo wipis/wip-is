@@ -254,3 +254,28 @@
         background-color: var(--app-bg);
     }
 }
+
+/*
+  While the home hero is on screen, the page itself scrolls (Base.astro sets
+  this attribute), so the panes below must not capture the wheel.
+*/
+@media (min-width: 768px) {
+    html[data-hero-in-view] [data-scroll-pane] {
+        overflow: hidden;
+        overscroll-behavior: auto;
+    }
+
+    /* Keeps the pane's gutter while it's locked, so its text doesn't reflow. */
+    [data-scroll-pane] {
+        scrollbar-gutter: stable;
+    }
+
+    /* The panes have their own scrollbars; the page's would sit beside them. */
+    html:has([data-hero]) {
+        scrollbar-width: none;
+    }
+
+    html:has([data-hero])::-webkit-scrollbar {
+        display: none;
+    }
+}

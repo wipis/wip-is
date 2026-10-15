@@ -13,10 +13,12 @@ const { label, groups } = Astro.props;
   <span class="section-label block text-[var(--app-fg-muted)]">{label}</span>
   <ul>
     {
-      groups.map(({ group, items }) => (
+      groups.map(({ group, items, mobile }) => (
         <li>
           <span class="text-[var(--app-fg-muted)]">{group},</span>{" "}
-          {items.join(", ")}
+          {items.map((item, i) => (
+            <span class={mobile.includes(item) ? undefined : "max-md:hidden"}>{i ? ", " : ""}{item}</span>
+          ))}
         </li>
       ))
     }

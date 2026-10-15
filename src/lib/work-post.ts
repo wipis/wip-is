@@ -31,6 +31,7 @@ export function parseWorkPost(value: unknown): WorkPost {
   if (!/^[a-z0-9-]+$/.test(id)) throw new Error("Invalid entry ID.");
   const company = text("company", 120, true);
   const project = text("project", 200);
+  const projectShort = text("projectShort", 200);
   const href = text("href", 2048);
   if (href && !/^https?:\/\//.test(href)) throw new Error("Project links must start with https:// or http://.");
   if (href) new URL(href);
@@ -53,7 +54,7 @@ export function parseWorkPost(value: unknown): WorkPost {
   const imageAlt = text("imageAlt", 300);
   if (data.published && (image || images.length) && !imageAlt) throw new Error("Add a description of the image before publishing.");
   const caption = text("caption", 1000);
-  return { id, company, year, published: data.published, listed, project, href, image, images, imageAlt, caption };
+  return { id, company, year, published: data.published, listed, project, projectShort, href, image, images, imageAlt, caption };
 }
 
 export function parseWorkDocument(value: unknown): WorkDocument {

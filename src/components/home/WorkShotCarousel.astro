@@ -56,11 +56,14 @@ const { shots, label, alt, eager = false } = Astro.props;
   [data-ready] .shot-control { display: block; }
   .shot-previous { left: 0; }
   .shot-next { right: 0; }
+  /* Phones and tablets: tapping anywhere on the image cycles to the next shot. */
+  [data-ready] .shot-previous { display: none; }
+  .shot-next { width: 100%; }
   .shot-control span {
+    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    display: grid;
     place-items: center;
     width: 40px;
     height: 40px;
@@ -99,10 +102,11 @@ const { shots, label, alt, eager = false } = Astro.props;
     pointer-events: none;
   }
   .shot-carousel:hover .shot-count { opacity: 1; }
+  .shot-control:focus-visible span { display: grid; }
   @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    [data-ready] .shot-previous { display: block; }
+    .shot-next { width: 50%; }
     .shot-control { cursor: none; }
-    .shot-control span { display: none; }
-    .shot-control:focus-visible span { display: grid; }
     [data-hovering] .shot-cursor { display: grid; }
   }
 </style>

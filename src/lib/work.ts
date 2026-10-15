@@ -6,6 +6,8 @@ export interface WorkItem {
   year?: number;
   /** What the work was, e.g. "Vercel Academy". */
   project?: string;
+  /** A shorter `project` for phones, so the line fits. */
+  projectShort?: string;
   /** Link text shown after the name, e.g. "@bridgertower". */
   handle?: string;
 }
@@ -22,12 +24,13 @@ export const SOCIAL_ITEMS: WorkItem[] = [
   { company: "YouTube", href: "https://youtube.com/@bridgertower", handle: "@bridgertower" },
 ];
 
-export const SERVICES: { group: string; items: string[] }[] = [
-  { group: "Brand", items: ["Strategy", "Identity", "Advertising", "Typesetting"] },
-  { group: "Product", items: ["Zero to One", "Design", "Design Systems"] },
-  { group: "Engineering", items: ["Web Apps", "Native Apps", "AI", "GTM", "Open Source"] },
-  { group: "Web", items: ["Design", "Development", "Landing Pages", "SEO"] },
-  { group: "Growth", items: ["Marketing", "Analytics", "Content", "Advertising"] },
+/** `mobile` is the shorter set shown on phones, so each group fits on one line. */
+export const SERVICES: { group: string; items: string[]; mobile: string[] }[] = [
+  { group: "Brand", items: ["Strategy", "Identity", "Advertising", "Typesetting"], mobile: ["Strategy", "Identity", "Advertising"] },
+  { group: "Product", items: ["Zero to One", "Design", "Design Systems"], mobile: ["Zero to One", "Design Systems"] },
+  { group: "Engineering", items: ["Web Apps", "Native Apps", "AI", "GTM", "Open Source"], mobile: ["Web Apps", "Native Apps", "AI"] },
+  { group: "Web", items: ["Design", "Development", "Landing Pages", "SEO"], mobile: ["Design", "Development", "SEO"] },
+  { group: "Growth", items: ["Marketing", "Analytics", "Content", "Advertising"], mobile: ["Marketing", "Analytics", "Content"] },
 ];
 
 export const CREDITS = [

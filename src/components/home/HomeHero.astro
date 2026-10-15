@@ -1,0 +1,174 @@
+---
+import { BRAND_NAME } from "~/lib/constants";
+
+// The letters of the name, repeated around a figure-eight. Positions are
+// rendered on the server (so the layout holds without JS or with reduced
+// motion) and the script below sets them drifting along the loop.
+const PHRASE = BRAND_NAME.replace(/\s/g, "").toUpperCase();
+const REPEATS = 4;
+const COUNT = PHRASE.length * REPEATS;
+
+// Seeded, so the scatter is the same on every build.
+let seed = 11;
+const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+
+// The loop in normalized units: u across, v along the lobes.
+const point = (t: number) => ({ u: Math.sin(t), v: Math.sin(2 * t) });
+
+// Tangent angle in pixels, so letters follow the curve at a given aspect ratio.
+// Landscape lays the loop across the screen; portrait stands it up.
+const angle = (t: number, width: number, height: number) => {
+  const portrait = height > width;
+  const dx = portrait ? 0.4 * width * 2 * Math.cos(2 * t) : 0.38 * width * Math.cos(t);
+  const dy = portrait ? 0.32 * height * Math.cos(t) : 0.3 * height * 2 * Math.cos(2 * t);
+  return (Math.atan2(dy, dx) * 180) / Math.PI;
+};
+
+const letters = Array.from({ length: COUNT }, (_, i) => {
+  const t = (i / COUNT) * Math.PI * 2;
+  const du = (random() - 0.5) * 0.1;
+  const dv = (random() - 0.5) * 0.18;
+  const spin = (random() - 0.5) * 60;
+  const phase = random() * Math.PI * 2;
+  const { u, v } = point(t);
+  return {
+    char: PHRASE[i % PHRASE.length],
+    data: { t, du, dv, spin, phase },
+    style: [
+      `--u: ${(u + du).toFixed(4)}`,
+      `--v: ${(v + dv).toFixed(4)}`,
+      `--r: ${(angle(t, 1440, 900) + spin).toFixed(2)}deg`,
+      `--rp: ${(angle(t, 390, 844) + spin).toFixed(2)}deg`,
+    ].join("; "),
+  };
+});
+---
+
+<section class="hero relative z-[55] h-dvh overflow-hidden border-b border-[var(--app-border)] bg-[var(--app-bg)] text-[var(--app-fg)]" aria-label={BRAND_NAME} data-hero>
+  <div class="hero-field" aria-hidden="true">
+    {letters.map(({ char, data, style }) => (
+      <span
+        class="hero-letter"
+        style={style}
+        data-hero-letter
+        data-t={data.t}
+        data-du={data.du}
+        data-dv={data.dv}
+        data-spin={data.spin}
+        data-phase={data.phase}
+      >{char}</span>
+    ))}
+  </div>
+
+  <p class="absolute start-6 top-6 text-base uppercase">{BRAND_NAME}</p>
+  <p class="absolute end-6 top-6 text-base uppercase">Applied Design</p>
+
+  <a href="#main" class="hero-next" aria-label="Scroll to the studio" data-hero-next>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M12 4v16M5 13l7 7 7-7" />
+    </svg>
+  </a>
+</section>
+
+<style>
+  .hero-field {
+    position: absolute;
+    inset: 0;
+    container-type: size;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-letter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: clamp(24px, min(5.6cqw, 8.6cqh), 88px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    transform:
+      translate(calc(50cqw + var(--u) * 38cqw), calc(50cqh + var(--v) * 30cqh))
+      translate(-50%, -50%)
+      rotate(var(--r));
+  }
+
+  @media (orientation: portrait) {
+    .hero-letter {
+      transform:
+        translate(calc(50cqw + var(--v) * 40cqw), calc(50cqh + var(--u) * 32cqh))
+        translate(-50%, -50%)
+        rotate(var(--rp));
+    }
+  }
+
+  .hero-next {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--app-fg);
+    transform: translateX(-50%);
+    transition: color 150ms;
+  }
+
+  .hero-next:hover {
+    color: var(--app-accent);
+  }
+</style>
+
+<script>
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (hero && !reducedMotion.matches) {
+    const letters = Array.from(hero.querySelectorAll<HTMLElement>("[data-hero-letter]"), (el) => ({
+      el,
+      t: Number(el.dataset.t),
+      du: Number(el.dataset.du),
+      dv: Number(el.dataset.dv),
+      spin: Number(el.dataset.spin),
+      phase: Number(el.dataset.phase),
+    }));
+
+    let width = hero.clientWidth;
+    let height = hero.clientHeight;
+    new ResizeObserver(() => {
+      width = hero.clientWidth;
+      height = hero.clientHeight;
+    }).observe(hero);
+
+    let frame = 0;
+    const start = performance.now();
+
+    const draw = (now: number) => {
+      const time = (now - start) / 1000;
+      const portrait = height > width;
+      for (const letter of letters) {
+        const t = letter.t + time * 0.04;
+        const drift = Math.sin(time * 0.6 + letter.phase);
+        const u = Math.sin(t) + letter.du + drift * 0.015;
+        const v = Math.sin(2 * t) + letter.dv + Math.cos(time * 0.5 + letter.phase) * 0.03;
+        const dx = portrait ? 0.4 * width * 2 * Math.cos(2 * t) : 0.38 * width * Math.cos(t);
+        const dy = portrait ? 0.32 * height * Math.cos(t) : 0.3 * height * 2 * Math.cos(2 * t);
+        const r = `${((Math.atan2(dy, dx) * 180) / Math.PI + letter.spin + drift * 8).toFixed(2)}deg`;
+        const style = letter.el.style;
+        style.setProperty("--u", u.toFixed(4));
+        style.setProperty("--v", v.toFixed(4));
+        style.setProperty("--r", r);
+        style.setProperty("--rp", r);
+      }
+      frame = requestAnimationFrame(draw);
+    };
+
+    // Only animate while the hero is on screen.
+    new IntersectionObserver(([entry]) => {
+      cancelAnimationFrame(frame);
+      if (entry?.isIntersecting) frame = requestAnimationFrame(draw);
+    }).observe(hero);
+  }
+</script>

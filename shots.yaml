@@ -1,0 +1,61 @@
+# pshot recipe for wip.is (see ~/Projects/pshot/docs/recipes.md for every option)
+project: wip-is
+defaults:
+  web:
+    url: https://wip.is
+    viewport: 1280x800
+
+# The WIP logo is fixed and floats over text once a pane scrolls; hide it on scrolled shots.
+_logo: &logo "div.fixed.top-6"
+
+shots:
+  # The hero, crossed: light page on the dark canvas, dark page on the light one.
+  - id: home-cross
+    source: { type: web, scheme: cross }
+    layout: single
+
+  # The intro up close, running off the right and bottom edges.
+  - id: intro-corner
+    source: { type: web }
+    layout: bleed
+    options: { edge: corner, zoom: 1.5, insetX: 0.1, insetY: 0.12 }
+
+  # The services list as type.
+  - id: services
+    source: { type: web, selector: "ul:has-text('Strategy')" }
+    layout: detail
+    options: { fill: 0.74 }
+
+  # The dated work list (tall viewport so the whole scrolling pane is on screen).
+  - id: work-list
+    source: { type: web, viewport: 1280x2200, selector: "ul:has-text('Personal Website')" }
+    layout: detail
+    options: { fill: 0.82 }
+
+  # MacBook (services) + iPhone (work list).
+  - id: devices
+    sources:
+      - { type: web, frame: macbook, scrollTo: "ul:has-text('Strategy')", hide: [*logo] }
+      - { type: web, frame: iphone, scrollTo: "ul:has-text('Personal Website')", hide: [*logo] }
+    layout: duo
+    options: { scale: 0.72, overlap: 0.06, dropB: 0.04 }
+
+  # iPad Pro, landscape, on the work list.
+  - id: ipad
+    source: { type: web, frame: ipad, viewport: 1376x1032, scrollTo: "ul:has-text('Personal Website')", hide: [*logo] }
+    layout: single
+
+  # Three phones down the page: intro, services, work.
+  - id: mobile-stagger
+    sources:
+      - { type: web, frame: iphone }
+      - { type: web, frame: iphone, scrollTo: "ul:has-text('Strategy')", hide: [*logo] }
+      - { type: web, frame: iphone, scrollTo: "ul:has-text('Personal Website')", hide: [*logo] }
+    layout: stagger
+    options: { size: 0.62, offset: 0.05, gap: 0.03 }
+
+  # A slow scroll down the mobile page, from the intro into the work list.
+  - id: mobile-scroll
+    source: { type: web, frame: iphone, hide: [*logo] }
+    layout: single
+    motion: { kind: scroll, duration: 6, to: "ul:has-text('Personal Website')", hold: 1 }

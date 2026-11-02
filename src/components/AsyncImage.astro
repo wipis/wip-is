@@ -13,7 +13,7 @@ const { src, alt, class: className, loading = "lazy" } = Astro.props;
 ---
 
 <div data-async-image class:list={["async-image", className]} style={`aspect-ratio: ${src.width} / ${src.height}`}>
-  <Image src={src} alt="" aria-hidden="true" width={32} quality={30} loading={loading} class="image-preview" />
+  <Image src={src} alt="" aria-hidden="true" width={64} quality={30} loading={loading} class="image-preview" />
   <Image src={src} alt={alt} loading={loading} decoding="async" class="image-full" />
 </div>
 
@@ -24,19 +24,14 @@ const { src, alt, class: className, loading = "lazy" } = Astro.props;
   .image-preview {
     position: absolute;
     inset: 0;
-    filter: blur(16px);
-    transform: scale(1.06);
+    filter: blur(4px);
+    transform: scale(1.015);
     pointer-events: none;
   }
   .image-full { position: relative; }
   /* Without JS, the full image stays visible and loads normally. */
-  [data-loading] .image-full { opacity: 0; filter: blur(12px); }
-  [data-loaded] .image-full { opacity: 1; filter: blur(0); }
-  [data-loaded] .image-preview { opacity: 0; }
-  @media (prefers-reduced-motion: no-preference) {
-    .image-full { transition: opacity 500ms ease-out, filter 650ms ease-out; }
-    .image-preview { transition: opacity 650ms ease-out; }
-  }
+  [data-loading] .image-full { opacity: 0; }
+  [data-loaded] .image-full { opacity: 1; }
 </style>
 
 <script>

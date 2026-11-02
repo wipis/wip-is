@@ -2,7 +2,7 @@
  * Redirects every non-canonical hostname to CANONICAL_HOST, then serves
  * the static site from the assets binding.
  *
- * wip.is, wip-design.com, wipdes.com, wip0.com, wip.ad, and wipds.com are all
+ * wipds.com, wip.is, wip-design.com, wipdes.com, wip0.com, and wip.ad are all
  * attached to this Worker. Cloudflare has no primary-domain setting, so the
  * canonical choice is enforced here.
  *

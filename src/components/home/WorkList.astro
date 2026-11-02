@@ -3,10 +3,8 @@ import CopyEmail from "~/components/CopyEmail.astro";
 import HandleList from "~/components/home/HandleList.astro";
 import WorkLedger from "~/components/home/WorkLedger.astro";
 import ServiceList from "~/components/home/ServiceList.astro";
-import TextList from "~/components/home/TextList.astro";
 import { CONTACT_EMAIL, LINK_CLASSNAME } from "~/lib/constants";
 import {
-  CREDITS,
   SERVICES,
   SOCIAL_ITEMS,
   WORK_ITEMS,
@@ -17,9 +15,8 @@ import {
   <ServiceList label="Service" groups={SERVICES} />
   <WorkLedger label="Work" items={WORK_ITEMS} />
   <HandleList label="Social" items={SOCIAL_ITEMS}>
-    <li slot="prefix">
-      Work Email: <CopyEmail label={CONTACT_EMAIL} class={LINK_CLASSNAME} />
+    <li slot="prefix" class="flex justify-between gap-4">
+      <span>Work Email</span> <CopyEmail label={CONTACT_EMAIL} class={LINK_CLASSNAME} />
     </li>
   </HandleList>
-  <TextList label="Credits" items={CREDITS} />
 </section>

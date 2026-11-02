@@ -35,5 +35,4 @@ export const SERVICES: { group: string; items: string[]; mobile: string[] }[] = 
 
 export const CREDITS = [
   "Site designed and built by WIP",
-  "Typeface: Inter by Rasmus Andersson",
 ];

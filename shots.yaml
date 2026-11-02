@@ -1,8 +1,8 @@
-# pshot recipe for wipds.com (see ~/Projects/pshot/docs/recipes.md for every option)
+# pshot recipe for wip.is (see ~/Projects/pshot/docs/recipes.md for every option)
 project: wip-is
 defaults:
   web:
-    url: https://wipds.com
+    url: https://wip.is
     viewport: 1280x800
 
 # The WIP logo is fixed and floats over text once a pane scrolls; hide it on scrolled shots.

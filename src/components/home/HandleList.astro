@@ -16,8 +16,8 @@ const { label, items } = Astro.props;
     <slot name="prefix" />
     {
       items.map((item) => (
-        <li>
-          {item.company}:{" "}
+        <li class="flex justify-between gap-4">
+          <span>{item.company}</span>
           <a
             href={item.href}
             target="_blank"

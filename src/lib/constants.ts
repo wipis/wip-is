@@ -1,13 +1,13 @@
-export const SITE_URL = "https://wipds.com";
+export const SITE_URL = "https://wip.is";
 /** Every other hostname on the Worker 301s here. See src/worker.ts. */
-export const CANONICAL_HOST = "wipds.com";
+export const CANONICAL_HOST = "wip.is";
 export const SITE_TITLE = "WIP — Design and Engineering Studio";
 export const SITE_DESCRIPTION =
   "Design and engineering studio by Bridger Tower. Brand, product, and web for select clients and projects.";
 export const APP_BACKGROUND = "#222";
 export const APP_FOREGROUND = "#f5f5f5";
 export const APP_FOREGROUND_MUTED = "#888";
-export const CONTACT_EMAIL = "bt@wip.is";
+export const CONTACT_EMAIL = "bt@wipds.com";
 export const BRAND_NAME = "Work In Progress";
 export const COPYRIGHT_NAME = "Bridger Tower";
 export const LINK_CLASSNAME =

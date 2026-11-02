@@ -18,11 +18,9 @@ const sorted = [...items].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
   <ul>
     {
       sorted.map((item) => (
-        <li class="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-1">
-          <span class="text-[var(--app-fg-muted)] tabular-nums">
-            {item.year && `${item.year},`}
-          </span>
-          <span>
+        <li class="flex justify-between gap-4">
+          <span class="shrink-0">
+            <span class="text-[var(--app-fg-muted)] tabular-nums">{item.year && `${item.year},`}</span>{" "}
             {item.href ? (
               <a
                 href={item.href}
@@ -35,14 +33,13 @@ const sorted = [...items].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
             ) : (
               <span>{item.company}</span>
             )}
-            {item.project && (
-              <span>
-                ,{" "}
-                <span class={item.projectShort ? "max-md:hidden" : undefined}>{item.project}</span>
-                {item.projectShort && <span class="md:hidden">{item.projectShort}</span>}
-              </span>
-            )}
           </span>
+          {item.project && (
+            <span class="min-w-0 text-right">
+              <span class={item.projectShort ? "max-md:hidden" : undefined}>{item.project}</span>
+              {item.projectShort && <span class="md:hidden">{item.projectShort}</span>}
+            </span>
+          )}
         </li>
       ))
     }

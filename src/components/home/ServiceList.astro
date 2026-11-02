@@ -14,11 +14,13 @@ const { label, groups } = Astro.props;
   <ul>
     {
       groups.map(({ group, items, mobile }) => (
-        <li>
-          <span class="text-[var(--app-fg-muted)]">{group},</span>{" "}
-          {items.map((item, i) => (
-            <span class={mobile.includes(item) ? undefined : "max-md:hidden"}>{i ? ", " : ""}{item}</span>
-          ))}
+        <li class="flex justify-between gap-4">
+          <span class="text-[var(--app-fg-muted)]">{group}</span>
+          <span class="min-w-0 text-right">
+            {items.map((item, i) => (
+              <span class={mobile.includes(item) ? undefined : "max-md:hidden"}>{i ? ", " : ""}{item}</span>
+            ))}
+          </span>
         </li>
       ))
     }

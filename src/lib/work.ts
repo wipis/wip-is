@@ -16,12 +16,12 @@ export interface WorkItem {
 export { LISTED_WORK as WORK_ITEMS } from "./work-posts";
 
 export const SOCIAL_ITEMS: WorkItem[] = [
+  { company: "YouTube", href: "https://youtube.com/@bridgertower", handle: "@bridgertower" },
   { company: "Bridger X", href: "https://x.com/bridgertower", handle: "@bridgertower" },
   { company: "WIP LinkedIn", href: "https://www.linkedin.com/company/wipdes", handle: "@wipdes" },
   { company: "Bridger LinkedIn", href: "https://www.linkedin.com/in/brijr", handle: "@brijr" },
   { company: "WIP GitHub", href: "https://github.com/wipis", handle: "@wipis" },
   { company: "Bridger GitHub", href: "https://github.com/brijr", handle: "@brijr" },
-  { company: "YouTube", href: "https://youtube.com/@bridgertower", handle: "@bridgertower" },
 ];
 
 /** `mobile` is the shorter set shown on phones, so each group fits on one line. */

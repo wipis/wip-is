@@ -207,21 +207,36 @@ const structuredData = {
   // Once the visitor scrolls past the hero it's gone for the rest of the
   // visit: it's removed and the scroll shifts by its height, so the view
   // stays put and there's nothing above to scroll back up to.
+  // Set once the hero's bottom border reaches the top of the screen. From then
+  // on the hero can't be scrolled back into view.
+  let passedHero = false;
+
   function removeHero() {
-    if (!hero || hero.hidden || window.scrollY < hero.offsetHeight - 1) return;
-    // Wait for a smooth scroll to settle: shifting the page mid-glide would
-    // cut its momentum dead. Lenis emits once more when it comes to rest.
-    if (pageScroll?.isScrolling) return;
+    if (!hero || hero.hidden) return;
     const height = hero.offsetHeight;
+    if (window.scrollY >= height - 1) passedHero = true;
+    if (!passedHero) return;
+    // While still gliding down, wait for it to settle: shifting the page
+    // mid-glide would cut its momentum dead. Lenis emits once more at rest.
+    // Turning back up removes the hero straight away, so it can't reappear.
+    const goingUp = pageScroll?.direction === -1;
+    if (pageScroll?.isScrolling && !goingUp) return;
     // Read before hiding: once the page shrinks, the browser may already
     // have clamped the scroll position, and subtracting again would overshoot.
+    // Never above the border: a turn back up has already moved a little.
     const scrolled = window.scrollY;
+    const top = Math.max(0, scrolled - height);
     hero.hidden = true;
-    window.scrollTo(0, Math.max(0, scrolled - height));
+    window.scrollTo(0, top);
     // ScrollField.astro listens for this so the WebGL field doesn't jump.
-    window.dispatchEvent(new CustomEvent("wip:scrollshift", { detail: height }));
-    if (pageScroll) pageScroll.resize();
-    else initScroll();
+    window.dispatchEvent(new CustomEvent("wip:scrollshift", { detail: scrolled - top }));
+    if (pageScroll) {
+      pageScroll.resize();
+      // Drop any glide still heading up, which was aimed at the old layout.
+      if (goingUp) pageScroll.scrollTo(top, { immediate: true, force: true });
+    } else {
+      initScroll();
+    }
   }
 
   initScroll();

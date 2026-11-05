@@ -8,6 +8,7 @@ export default defineConfig({
   // Absolute URLs are built from this (canonical link, OG tags, JSON-LD).
   site: SITE_URL,
   integrations: [react()],
+  devToolbar: { enabled: false },
   // Default output is `static` — every page is prerendered to HTML at build
   // time and `dist/` is uploaded as Worker static assets. The only server-side
   // behavior in production is the canonical-host redirect in src/worker.ts.

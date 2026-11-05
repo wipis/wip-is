@@ -1,0 +1,233 @@
+---
+// A fine paper-like grain over a soft tonal wash, drawn with WebGL2 behind the
+// whole site. The grain stays put; only the soft wash drifts, slower than the
+// content, as the page scrolls. Purely decorative:
+// without WebGL2 the canvas is removed and the plain page background shows.
+---
+
+<canvas class="scroll-field" aria-hidden="true" data-scroll-field></canvas>
+
+<style>
+  .scroll-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Behind the page content. Works because <body> has no background of its own. */
+    z-index: -1;
+    width: 100%;
+    /* The large viewport, so mobile browser bars showing and hiding don't resize it. */
+    height: 100lvh;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  import { sampleScroll } from "~/lib/scroll-motion";
+
+  const VERTEX = `#version 300 es
+    void main() {
+      // One triangle that covers the screen; no vertex buffer needed.
+      vec2 p = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2);
+      gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
+    }`;
+
+  const FRAGMENT = `#version 300 es
+    precision highp float;
+
+    uniform vec2 uResolution;   // drawing buffer, device px
+    uniform float uPixelRatio;
+    uniform float uScroll;      // page scroll, css px
+    uniform float uViewport;    // visible viewport height, css px
+    uniform vec3 uBackground;
+    uniform vec3 uInk;
+
+    out vec4 outColor;
+
+    const float PARALLAX = 0.15;     // the wash moves at this fraction of the page
+    const float GRAIN_SIZE = 1.25;   // css px
+    const float GRAIN_AMOUNT = 0.09; // share of the background-to-ink distance
+    const float WASH_SIZE = 420.0;   // css px across one soft patch
+    const float WASH_AMOUNT = 0.07;
+
+    float hash(vec2 p) {
+      p = fract(p * vec2(123.34, 456.21));
+      p += dot(p, p + 45.32);
+      return fract(p.x * p.y);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(
+        mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+        mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+        u.y
+      );
+    }
+
+    float fbm(vec2 p) {
+      float value = 0.0;
+      float amplitude = 0.5;
+      for (int i = 0; i < 4; i++) {
+        value += amplitude * noise(p);
+        p = p * 2.03 + 17.1;
+        amplitude *= 0.5;
+      }
+      return value;
+    }
+
+    void main() {
+      vec2 frag = vec2(gl_FragCoord.x, uResolution.y - gl_FragCoord.y) / uPixelRatio;
+      // Grain is fixed to the screen. Fine detail sliding by fractions of a
+      // pixel shimmers, so only the soft wash below moves with the scroll.
+      vec2 g = frag / GRAIN_SIZE;
+      float grain = (noise(g) + 0.5 * noise(g * 2.1 + 31.7)) / 1.5 - 0.5;
+
+      // Broad, soft variation in tone, like light falling unevenly on paper.
+      float wash = fbm((frag + vec2(0.0, uScroll * PARALLAX)) / WASH_SIZE) - 0.47;
+
+      float amount = grain * GRAIN_AMOUNT + wash * WASH_AMOUNT;
+
+      // Fade out under the footer's gradient (SiteFooter.astro: 128px tall,
+      // solid for the lower half) so the texture doesn't stop at its edges.
+      amount *= smoothstep(64.0, 128.0, uViewport - frag.y);
+
+      // Signed around the background, so the page's overall tone is unchanged.
+      outColor = vec4(uBackground + (uInk - uBackground) * amount, 1.0);
+    }`;
+
+  const canvas = document.querySelector<HTMLCanvasElement>("[data-scroll-field]");
+  const gl = canvas?.getContext("webgl2", {
+    alpha: false,
+    antialias: false,
+    depth: false,
+    stencil: false,
+    powerPreference: "low-power",
+  });
+
+  if (canvas && !gl) canvas.remove();
+
+  if (canvas && gl) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const compile = (type: number, source: string) => {
+      const shader = gl.createShader(type)!;
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        throw new Error(gl.getShaderInfoLog(shader) ?? "Shader failed to compile");
+      }
+      return shader;
+    };
+
+    let uniforms: Record<string, WebGLUniformLocation | null> = {};
+
+    const setup = () => {
+      const program = gl.createProgram();
+      gl.attachShader(program, compile(gl.VERTEX_SHADER, VERTEX));
+      gl.attachShader(program, compile(gl.FRAGMENT_SHADER, FRAGMENT));
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        throw new Error(gl.getProgramInfoLog(program) ?? "Program failed to link");
+      }
+      gl.useProgram(program);
+      gl.bindVertexArray(gl.createVertexArray());
+      uniforms = Object.fromEntries(
+        ["uResolution", "uPixelRatio", "uScroll", "uViewport", "uBackground", "uInk"].map(
+          (name) => [name, gl.getUniformLocation(program, name)],
+        ),
+      );
+    };
+
+    // Theme colors come from the same CSS variables as the rest of the page.
+    const readColor = (variable: string) => {
+      canvas.style.color = `var(${variable})`;
+      const [r = 0, g = 0, b = 0] = (getComputedStyle(canvas).color.match(/[\d.]+/g) ?? []).map(Number);
+      return [r / 255, g / 255, b / 255] as const;
+    };
+    let background = readColor("--app-bg");
+    let ink = readColor("--app-fg-muted");
+
+    let pixelRatio = 1;
+    const resize = () => {
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(canvas.clientWidth * pixelRatio);
+      canvas.height = Math.round(canvas.clientHeight * pixelRatio);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+
+    let drawnScroll = Number.NaN;
+    let frame = 0;
+
+    const draw = (scroll: number) => {
+      gl.uniform2f(uniforms.uResolution!, canvas.width, canvas.height);
+      gl.uniform1f(uniforms.uPixelRatio!, pixelRatio);
+      gl.uniform1f(uniforms.uScroll!, reducedMotion.matches ? 0 : scroll);
+      // innerHeight, not the canvas height: on phones the canvas is the large
+      // viewport, while the fixed footer sits at the bottom of the visible one.
+      gl.uniform1f(uniforms.uViewport!, window.innerHeight);
+      gl.uniform3f(uniforms.uBackground!, ...background);
+      gl.uniform3f(uniforms.uInk!, ...ink);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      drawnScroll = scroll;
+    };
+
+    const redraw = () => draw(drawnScroll || 0);
+
+    const tick = (now: number) => {
+      frame = requestAnimationFrame(tick);
+      const { position } = sampleScroll(now);
+      // The texture only changes with the scroll, so only draw when it moved.
+      if (position !== drawnScroll) draw(position);
+    };
+
+    const run = () => {
+      cancelAnimationFrame(frame);
+      if (reducedMotion.matches) draw(0);
+      else frame = requestAnimationFrame(tick);
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+      // Resizing clears the canvas, so redraw straight away rather than next frame.
+      redraw();
+    });
+
+    const themeObserver = new MutationObserver(() => {
+      background = readColor("--app-bg");
+      ink = readColor("--app-fg-muted");
+      redraw();
+    });
+
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      cancelAnimationFrame(frame);
+    };
+    const onContextRestored = () => {
+      setup();
+      redraw();
+      run();
+    };
+
+    setup();
+    resize();
+    run();
+    resizeObserver.observe(canvas);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    reducedMotion.addEventListener("change", run);
+    canvas.addEventListener("webglcontextlost", onContextLost);
+    canvas.addEventListener("webglcontextrestored", onContextRestored);
+
+    if (import.meta.hot) {
+      import.meta.hot.dispose(() => {
+        cancelAnimationFrame(frame);
+        resizeObserver.disconnect();
+        themeObserver.disconnect();
+        reducedMotion.removeEventListener("change", run);
+        canvas.removeEventListener("webglcontextlost", onContextLost);
+        canvas.removeEventListener("webglcontextrestored", onContextRestored);
+      });
+    }
+  }
+</script>

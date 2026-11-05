@@ -44,7 +44,7 @@ const letters = Array.from({ length: COUNT }, (_, i) => {
 });
 ---
 
-<section class="hero relative z-[55] h-dvh overflow-hidden border-b border-[var(--app-border)] bg-[var(--app-bg)] text-[var(--app-fg)]" aria-label={BRAND_NAME} data-hero>
+<section class="hero relative z-[55] h-dvh overflow-hidden border-b border-[var(--app-border)] text-[var(--app-fg)]" aria-label={BRAND_NAME} data-hero>
   <div class="hero-field" aria-hidden="true">
     {letters.map(({ char, data, style }) => (
       <span
@@ -90,6 +90,7 @@ const letters = Array.from({ length: COUNT }, (_, i) => {
     transform:
       translate(calc(50cqw + var(--u) * 38cqw), calc(50cqh + var(--v) * 30cqh))
       translate(-50%, -50%)
+      scale(1, var(--sy, 1))
       rotate(var(--r));
   }
 
@@ -98,6 +99,7 @@ const letters = Array.from({ length: COUNT }, (_, i) => {
       transform:
         translate(calc(50cqw + var(--v) * 40cqw), calc(50cqh + var(--u) * 32cqh))
         translate(-50%, -50%)
+        scale(1, var(--sy, 1))
         rotate(var(--rp));
     }
   }
@@ -122,6 +124,15 @@ const letters = Array.from({ length: COUNT }, (_, i) => {
 </style>
 
 <script>
+  import { sampleScroll } from "~/lib/scroll-motion";
+
+  // How the letters answer the scroll.
+  const WIND = 0.004; // radians along the loop per px scrolled
+  const SCATTER = 3; // extra looseness at full speed, as a multiple of the rest scatter
+  const LEAN = 30; // degrees the letters tip toward the scroll at full speed
+  const STRETCH = 0.5; // extra vertical stretch at full speed
+  const OPEN = 0.35; // how much wider the loop is once the hero is scrolled away
+
   const hero = document.querySelector<HTMLElement>("[data-hero]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -148,19 +159,29 @@ const letters = Array.from({ length: COUNT }, (_, i) => {
     const draw = (now: number) => {
       const time = (now - start) / 1000;
       const portrait = height > width;
+      // Scrolling winds the letters around the loop (back again on the way
+      // up), a fast scroll loosens and tips them, and the loop opens out as
+      // the hero leaves the screen.
+      const { position, velocity, speed } = sampleScroll(now);
+      const wind = position * WIND;
+      const scatter = 1 + speed * SCATTER;
+      const open = 1 + Math.min(Math.max(position / height, 0), 1) * OPEN;
+      const lean = Math.sign(velocity) * speed * LEAN;
+      const stretch = (1 + speed * STRETCH).toFixed(3);
       for (const letter of letters) {
-        const t = letter.t + time * 0.04;
+        const t = letter.t + time * 0.04 + wind;
         const drift = Math.sin(time * 0.6 + letter.phase);
-        const u = Math.sin(t) + letter.du + drift * 0.015;
-        const v = Math.sin(2 * t) + letter.dv + Math.cos(time * 0.5 + letter.phase) * 0.03;
+        const u = (Math.sin(t) + (letter.du + drift * 0.015) * scatter) * open;
+        const v = (Math.sin(2 * t) + (letter.dv + Math.cos(time * 0.5 + letter.phase) * 0.03) * scatter) * open;
         const dx = portrait ? 0.4 * width * 2 * Math.cos(2 * t) : 0.38 * width * Math.cos(t);
         const dy = portrait ? 0.32 * height * Math.cos(t) : 0.3 * height * 2 * Math.cos(2 * t);
-        const r = `${((Math.atan2(dy, dx) * 180) / Math.PI + letter.spin + drift * 8).toFixed(2)}deg`;
+        const r = `${((Math.atan2(dy, dx) * 180) / Math.PI + (letter.spin + drift * 8) * scatter + lean).toFixed(2)}deg`;
         const style = letter.el.style;
         style.setProperty("--u", u.toFixed(4));
         style.setProperty("--v", v.toFixed(4));
         style.setProperty("--r", r);
         style.setProperty("--rp", r);
+        style.setProperty("--sy", stretch);
       }
       frame = requestAnimationFrame(draw);
     };

@@ -35,7 +35,7 @@ const sorted = [...items].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
             )}
           </span>
           {item.project && (
-            <span class="min-w-0 text-right">
+            <span class="min-w-0 text-right text-[var(--app-fg-muted)]">
               <span class={item.projectShort ? "max-md:hidden" : undefined}>{item.project}</span>
               {item.projectShort && <span class="md:hidden">{item.projectShort}</span>}
             </span>

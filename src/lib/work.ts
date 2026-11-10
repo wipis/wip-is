@@ -26,11 +26,10 @@ export const SOCIAL_ITEMS: WorkItem[] = [
 
 /** `mobile` is the shorter set shown on phones, so each group fits on one line. */
 export const SERVICES: { group: string; items: string[]; mobile: string[] }[] = [
-  { group: "Brand", items: ["Strategy", "Identity", "Advertising", "Typesetting"], mobile: ["Strategy", "Identity", "Advertising"] },
-  { group: "Product", items: ["Zero to One", "Design", "Design Systems"], mobile: ["Zero to One", "Design Systems"] },
-  { group: "Engineering", items: ["Web Apps", "Native Apps", "AI", "GTM", "Open Source"], mobile: ["Web Apps", "Native Apps", "AI"] },
-  { group: "Web", items: ["Design", "Development", "Landing Pages", "SEO"], mobile: ["Design", "Development", "SEO"] },
-  { group: "Growth", items: ["Marketing", "Analytics", "Content", "Advertising"], mobile: ["Marketing", "Analytics", "Content"] },
+  { group: "Product Design", items: ["Zero to One", "Interfaces", "Design Systems"], mobile: ["Zero to One", "Interfaces"] },
+  { group: "Engineering", items: ["Web Apps", "Native Apps", "Frontend", "Open Source"], mobile: ["Web Apps", "Native Apps"] },
+  { group: "AI Engineering", items: ["Agents", "LLM Apps", "Evals", "AI Interfaces"], mobile: ["Agents", "LLM Apps", "Evals"] },
+  { group: "Brand and Web", items: ["Identity", "Websites", "Landing Pages"], mobile: ["Identity", "Websites"] },
 ];
 
 export const CREDITS = [

@@ -15,7 +15,7 @@ const { label, groups } = Astro.props;
     {
       groups.map(({ group, items, mobile }) => (
         <li class="flex justify-between gap-4">
-          <span class="text-[var(--app-fg-muted)]">{group}</span>
+          <span class="shrink-0 whitespace-nowrap text-[var(--app-fg-muted)]">{group}</span>
           <span class="min-w-0 text-right">
             {items.map((item, i) => (
               <span class={mobile.includes(item) ? undefined : "max-md:hidden"}>{i ? ", " : ""}{item}</span>

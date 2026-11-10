@@ -28,7 +28,7 @@ export const SOCIAL_ITEMS: WorkItem[] = [
 export const SERVICES: { group: string; items: string[]; mobile: string[] }[] = [
   { group: "Product Design", items: ["Zero to One", "Interfaces", "Design Systems"], mobile: ["Zero to One", "Interfaces"] },
   { group: "Engineering", items: ["Web Apps", "Native Apps", "Frontend", "Open Source"], mobile: ["Web Apps", "Native Apps"] },
-  { group: "AI Engineering", items: ["Agents", "LLM Apps", "Evals", "AI Interfaces"], mobile: ["Agents", "LLM Apps", "Evals"] },
+  { group: "AI Engineering", items: ["Agents", "LLM Apps", "MCP", "AI Interfaces"], mobile: ["Agents", "LLM Apps", "MCP"] },
   { group: "Brand and Web", items: ["Identity", "Websites", "Landing Pages"], mobile: ["Identity", "Websites"] },
 ];
 
